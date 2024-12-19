@@ -1,0 +1,746 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introduction to Java Applications</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 90%;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-bottom: 2em;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-default_background {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-default_background {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+	.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="5deff3df-2835-437b-a01e-4e0065dd9f99" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><h1 class="page-title"><strong>Introduction to Java Applications</strong></h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><h2 id="16056e01-f431-80a1-a78d-c1a91902633d" class="">1. <strong>Writing First Program in Java</strong></h2><ul id="16056e01-f431-80a7-8fb4-cb0ab5e09e41" class="bulleted-list"><li style="list-style-type:disc"><strong>Class Structure:</strong><ul id="16056e01-f431-805b-99db-fa9cd172fe6a" class="bulleted-list"><li style="list-style-type:circle"><strong>Class Declaration:</strong> <code>public class Welcome1</code></li></ul><ul id="16056e01-f431-80f4-aba0-e09cbff5caa7" class="bulleted-list"><li style="list-style-type:circle"><strong>Method Declaration:</strong> <code>public static void main(String[] args)</code></li></ul></li></ul><ul id="16056e01-f431-80c9-84bd-f9fc9528564d" class="bulleted-list"><li style="list-style-type:disc"><strong>Compiling and Running:</strong><ul id="16056e01-f431-8032-87a3-ec1eae3c9625" class="bulleted-list"><li style="list-style-type:circle">Compile: <code>javac Welcome1.java</code></li></ul><ul id="16056e01-f431-80ce-bad8-c047f5c78c0f" class="bulleted-list"><li style="list-style-type:circle">Execute: <code>java Welcome1</code></li></ul></li></ul><ul id="16056e01-f431-805c-9136-f67559f95e9c" class="bulleted-list"><li style="list-style-type:disc"><strong>Comments:</strong><ul id="16056e01-f431-8061-b7a2-fe51752789a3" class="bulleted-list"><li style="list-style-type:circle">Single-line: <code>//</code></li></ul><ul id="16056e01-f431-802c-9ead-c536f94d9d1d" class="bulleted-list"><li style="list-style-type:circle">Multi-line: <code>/* ... */</code></li></ul><ul id="16056e01-f431-8099-9e96-fd1ef99bca7f" class="bulleted-list"><li style="list-style-type:circle">Javadoc: <code>/** ... */</code></li></ul></li></ul><div id="16056e01-f431-807f-84e3-f4c5d0dd887d" class="column-list"><div id="16056e01-f431-80c6-9f74-e0a72f8a8fb3" style="width:37.5%" class="column"><h3 id="16056e01-f431-8059-b2ac-c49481e489bd" class=""><strong>Blank Line</strong></h3><ul id="16056e01-f431-8015-bdaf-fdc5f58572e3" class="bulleted-list"><li style="list-style-type:disc">Makes the program <strong>more readable</strong>.</li></ul><ul id="16056e01-f431-8068-b011-fbcf6b3ee30d" class="bulleted-list"><li style="list-style-type:disc">Blank lines, spaces, and tabs are <strong>white-space characters</strong>.</li></ul><ul id="16056e01-f431-8016-8af2-c7387cf9e0ca" class="bulleted-list"><li style="list-style-type:disc"><strong>Ignored by the compiler</strong>.</li></ul></div><div id="16056e01-f431-8097-9bd9-d8e39c8f2413" style="width:62.5%" class="column"><h3 id="16056e01-f431-802d-ad34-dff920dbd4e7" class=""><strong>Begins Class Declaration for Class </strong><code><strong>Welcome1</strong></code></h3><ul id="16056e01-f431-80fd-9154-f707279c2f28" class="bulleted-list"><li style="list-style-type:disc">Every <strong>Java program</strong> has at least one <strong>user-defined class</strong>.</li></ul><ul id="16056e01-f431-802d-a841-fb704be63426" class="bulleted-list"><li style="list-style-type:disc"><strong>Keyword:</strong> Words reserved for use by Java.</li></ul><ul id="16056e01-f431-80cf-b2d0-d954b0e642ce" class="bulleted-list"><li style="list-style-type:disc"><strong>Class Declaration Syntax: </strong>Use the <code><strong>class</strong></code> keyword followed by the class name.</li></ul></div></div><hr id="16056e01-f431-8027-9ef4-fd6f495c70e5"/><h3 id="16056e01-f431-806d-bd4d-fdb92c325953" class=""><strong>Name of Class Called Identifier</strong></h3><div id="16056e01-f431-80de-8458-e321090cfbfd" class="column-list"><div id="16056e01-f431-8019-9227-db90153be648" style="width:25%" class="column"><ul id="16056e01-f431-8056-aff1-d7a4a2cbd845" class="toggle"><li><details open=""><summary><strong>Definition:</strong></summary><p id="16056e01-f431-803d-8a51-caf1b2b2e985" class="">An <strong>identifier</strong> is the name of a class in Java.</p></details></li></ul></div><div id="16056e01-f431-80c8-aa1c-e59408b63ec6" style="width:25%" class="column"><ul id="16056e01-f431-8016-a1b9-cb43e39efd7a" class="toggle"><li><details open=""><summary><strong>Rules for Identifiers:</strong></summary><ul id="16056e01-f431-80f6-a81e-c9f42d398547" class="bulleted-list"><li style="list-style-type:disc">Consists of <strong>letters</strong>, <strong>digits</strong>, <strong>underscores (</strong><code><strong>_</strong></code><strong>)</strong>, and <strong>dollar signs (</strong><code><strong>$</strong></code><strong>)</strong>.</li></ul><ul id="16056e01-f431-806a-9efc-f789c56d6a33" class="bulleted-list"><li style="list-style-type:disc">Cannot <strong>start with a digit</strong> or contain <strong>spaces</strong>.</li></ul></details></li></ul></div><div id="16056e01-f431-804b-b32b-e0024e90a5a2" style="width:25%" class="column"><ul id="16056e01-f431-80fc-90be-e611b84d2803" class="toggle"><li><details open=""><summary><strong>Examples:</strong></summary><ul id="16056e01-f431-80bc-9876-f2a03c204ef1" class="bulleted-list"><li style="list-style-type:disc"><strong>Valid:</strong> <code>Welcome1</code>, <code>$value</code>, <code>_value</code>, <code>button7</code></li></ul><ul id="16056e01-f431-80e7-bd60-f2f1d1e1a3cb" class="bulleted-list"><li style="list-style-type:disc"><strong>Invalid:</strong> <code>7button</code> </li></ul></details></li></ul></div><div id="16056e01-f431-804f-b9a9-fa0397113a07" style="width:25%" class="column"><ul id="16056e01-f431-806f-bae8-dc31d30cf919" class="toggle"><li><details open=""><summary><strong>Case Sensitivity:</strong></summary><ul id="16056e01-f431-809a-9d9f-f902633e563d" class="bulleted-list"><li style="list-style-type:disc">Java is <strong>case-sensitive</strong>.</li></ul><ul id="16056e01-f431-8080-bfbb-d41d5fdc7155" class="bulleted-list"><li style="list-style-type:disc">Examples: <code>a1</code> and <code>A1</code> are considered different.</li></ul></details></li></ul></div></div><hr id="16056e01-f431-80d1-92cc-c7c1a4e0d623"/><div id="16056e01-f431-80da-96a0-dfa0fae4f412" class="column-list"><div id="16056e01-f431-8003-991e-ebd47c9e26d5" style="width:33.33333333333333%" class="column"><h3 id="16056e01-f431-805f-846a-c4c710ef2b94" class=""><strong>Saving Files</strong></h3><ul id="16056e01-f431-80f3-b51b-dc79cc618beb" class="bulleted-list"><li style="list-style-type:disc">The file name must match the <strong>class name</strong> and have the <code><strong>.java</strong></code><strong> extension</strong>.</li></ul><ul id="16056e01-f431-8002-84ff-ec6e0f7cff21" class="bulleted-list"><li style="list-style-type:disc">Example: <code>Welcome1.java</code>.</li></ul></div><div id="16056e01-f431-80ea-b508-c93b50fba0e6" style="width:24.999999999999993%" class="column"><h3 id="16056e01-f431-8093-98dc-cbf2b7630c55" class=""><strong>Left Brace </strong><code><strong>{</strong></code></h3><ul id="16056e01-f431-8047-9120-d74a973cb826" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong><ul id="16056e01-f431-80e9-afa6-c9c66108dc9c" class="bulleted-list"><li style="list-style-type:circle">Begins the <strong>body</strong> of every class.</li></ul><ul id="16056e01-f431-804f-8f35-d1edbf43d16b" class="bulleted-list"><li style="list-style-type:circle">The <strong>right brace </strong><code><strong>}</strong></code> ends declarations</li></ul></li></ul></div><div id="16056e01-f431-808e-b2b0-c43c039311af" style="width:41.66666666666668%" class="column"><h3 id="16056e01-f431-80dd-94d3-ef83f31f5d06" class=""><strong>Part of Every Java Application</strong></h3><ol type="1" id="16056e01-f431-807b-ac14-cfac2bfb5e9a" class="numbered-list" start="1"><li>Applications begin executing at the <code><strong>main</strong></code><strong> method</strong>.</li></ol><ol type="1" id="16056e01-f431-801a-b1e7-faa17c66c150" class="numbered-list" start="2"><li><strong>Parentheses </strong><code><strong>()</strong></code> indicate that <code>main</code> is a <strong>method</strong> (discussed further in Chapter 6).</li></ol><ol type="1" id="16056e01-f431-80ec-9945-e52144c99668" class="numbered-list" start="3"><li><strong>Methods: </strong>Java applications contain one or more <strong>methods</strong>.</li></ol></div></div><hr id="16056e01-f431-801d-8c3c-cb6b39617f58"/><div id="16056e01-f431-806f-b737-d76080931c2f" class="column-list"><div id="16056e01-f431-804f-835e-cd59885f596d" style="width:25%" class="column"><h3 id="16056e01-f431-8087-87b6-d631267d0a2b" class=""><strong>Instructs Computer to Perform an Action</strong></h3><ul id="16056e01-f431-80e6-a55a-ee6fc521142d" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Prints a string of characters.<ul id="16056e01-f431-8046-bfe3-d4672ef59381" class="bulleted-list"><li style="list-style-type:circle">A <strong>string</strong> is a series of characters enclosed within double quotes <code>&quot; &quot;</code>.</li></ul><ul id="16056e01-f431-80d0-8ab0-c11b930400c0" class="bulleted-list"><li style="list-style-type:circle"><strong>White-spaces</strong> in strings are <strong>not ignored</strong> by the compiler.</li></ul></li></ul></div><div id="16056e01-f431-8076-bc51-d43653dae98b" style="width:25%" class="column"><h3 id="16056e01-f431-80dc-a577-eb7387ece403" class=""><strong>System.out</strong></h3><ul id="16056e01-f431-80e6-9fb3-c06883bf79b0" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong><ul id="16056e01-f431-8081-b00b-cf085823f1d4" class="bulleted-list"><li style="list-style-type:circle">Standard output object.</li></ul><ul id="16056e01-f431-80ef-9d8c-ddcbe833ab4c" class="bulleted-list"><li style="list-style-type:circle">Prints output to the <strong>command window</strong> (e.g., MS-DOS prompt).</li></ul><p id="16056e01-f431-8027-be6e-de6796411962" class="">
+	</p></li></ul></div><div id="16056e01-f431-80eb-8fad-f296e51207ab" style="width:31.25%" class="column"><h3 id="16056e01-f431-8091-b3cf-de0f813ec639" class=""><strong>Method </strong><code><strong>System.out.println</strong></code></h3><ul id="16056e01-f431-8068-b11f-eacf6ebfab16" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Displays a line of text.</li></ul><ul id="16056e01-f431-80b9-8b8a-d1488d12d04b" class="bulleted-list"><li style="list-style-type:disc"><strong>Arguments:</strong> Content inside <strong>parentheses </strong><code><strong>()</strong></code>.</li></ul><p id="16056e01-f431-800e-b5b4-fa6bfce8ce50" class=""><strong>Example:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8033-861e-e1120ab524f6" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.println(&quot;Hello, World!&quot;);</code></pre></div><div id="16056e01-f431-80f7-908b-d9b4bc367eac" style="width:18.750000000000004%" class="column"><h3 id="16056e01-f431-800f-ab8c-d1651e84affd" class=""><strong>This Line Known as a Statement</strong></h3><ul id="16056e01-f431-8087-83a2-d694640af2ee" class="bulleted-list"><li style="list-style-type:disc"><strong>Statements</strong> must end with a semicolon (<code>;</code>).</li></ul></div></div><hr id="16056e01-f431-8080-960a-ccde130f09c4"/><h3 id="16056e01-f431-8004-83a9-f3166e7d4398" class=""><strong>Common Escape Sequences in Java</strong></h3><table id="16056e01-f431-806c-bac8-ea66cb75b874" class="simple-table"><thead class="simple-table-header"><tr id="16056e01-f431-80b8-abdc-dd3345a5a4ed"><th id="U]hW" class="simple-table-header-color simple-table-header" style="width:166px"><strong>Escape Sequence</strong></th><th id="jRd_" class="simple-table-header-color simple-table-header" style="width:1565px"><strong>Description</strong></th></tr></thead><tbody><tr id="16056e01-f431-8045-9fb1-cd3f46fab005"><td id="U]hW" class="" style="width:166px"><code>\n</code></td><td id="jRd_" class="" style="width:1565px">Newline: Moves the cursor to the beginning of the <strong>next line</strong>.</td></tr><tr id="16056e01-f431-80e8-bd62-d92cf30c9b65"><td id="U]hW" class="" style="width:166px"><code>\t</code></td><td id="jRd_" class="" style="width:1565px">Horizontal Tab: Moves the cursor to the next <strong>tab stop</strong>.</td></tr><tr id="16056e01-f431-8016-81e5-c5f1a3fcf4be"><td id="U]hW" class="" style="width:166px"><code>\r</code></td><td id="jRd_" class="" style="width:1565px">Carriage Return: Moves the cursor to the <strong>beginning of the current line</strong>.</td></tr><tr id="16056e01-f431-80ec-9640-eccc450789bc"><td id="U]hW" class="" style="width:166px"><code>\\</code></td><td id="jRd_" class="" style="width:1565px">Backslash: Prints a <strong>backslash (</strong><code><strong>\</strong></code><strong>) character</strong>.</td></tr><tr id="16056e01-f431-80d9-b542-d2453b13339a"><td id="U]hW" class="" style="width:166px"><code>\&quot;</code></td><td id="jRd_" class="" style="width:1565px">Double Quote: Prints a <strong>double-quote</strong> character. Example: <code>System.out.println(&quot;\&quot;in quotes\&quot;&quot;);</code> = Output: <strong>&quot;in quotes&quot;</strong></td></tr></tbody></table><hr id="16056e01-f431-80e7-b83f-c8960a553036"/><p id="16056e01-f431-806b-9ce9-e6de419e6fd7" class="">
+	</p><h2 id="16056e01-f431-8037-93bb-d12a7300fee2" class="">2. <strong>Displaying Text</strong></h2><div id="16056e01-f431-8040-b6fc-cd1f4cc09d7a" class="column-list"><div id="16056e01-f431-806b-b01c-f33106234ac2" style="width:33.333333333333336%" class="column"><ul id="16056e01-f431-809d-8a69-d3814b57c9eb" class="toggle"><li><details open=""><summary><strong>Methods:</strong></summary><ul id="16056e01-f431-80f1-90b7-fdec2ba5f6de" class="bulleted-list"><li style="list-style-type:disc"><code>print</code> - Prints text without newline.</li></ul><ul id="16056e01-f431-80fd-993e-cdae56ca361f" class="bulleted-list"><li style="list-style-type:disc"><code>println</code> - Prints text with a newline.</li></ul><ul id="16056e01-f431-8073-994e-fb0425e5d00c" class="bulleted-list"><li style="list-style-type:disc"><code>printf</code> - Used for formatted text output.</li></ul></details></li></ul></div><div id="16056e01-f431-80f6-abab-cd40401d01b6" style="width:33.333333333333336%" class="column"><ul id="16056e01-f431-80e5-84dc-cdc23a80883c" class="toggle"><li><details open=""><summary><strong>Format Specifiers:</strong></summary><ul id="16056e01-f431-8073-8a91-fc49d7e8dcf0" class="bulleted-list"><li style="list-style-type:disc"><code>%s</code> - Strings</li></ul><ul id="16056e01-f431-80fa-aeed-f2edf9cdebdb" class="bulleted-list"><li style="list-style-type:disc"><code>%d</code> - Integers</li></ul><ul id="16056e01-f431-8035-b1be-d0f199a9367d" class="bulleted-list"><li style="list-style-type:disc"><code>%f</code> - Floating-point numbers</li></ul><ul id="16056e01-f431-8043-be75-d9e078fbf773" class="bulleted-list"><li style="list-style-type:disc"><code>%n</code> - Newline</li></ul></details></li></ul></div><div id="16056e01-f431-809d-bc9f-d76f1dba41cc" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-80e3-a68a-ebcd97244706" class="toggle"><li><details open=""><summary><strong>Example:</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8016-9c70-e028a05b836c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.printf(&quot;Hello %s!%n&quot;, &quot;World&quot;);</code></pre><p id="16056e01-f431-8072-afca-d4f8d7de80ec" class=""><strong>Output: </strong><code><strong>Hello World!</strong></code></p></details></li></ul></div></div><hr id="16056e01-f431-80f2-b948-fafec45ead35"/><div id="16056e01-f431-8027-a7d7-efa714a02442" class="column-list"><div id="16056e01-f431-80e9-9eab-f3aedb652eb4" style="width:25%" class="column"><ul id="16056e01-f431-8043-8723-dc5bc3936f1d" class="toggle"><li><details open=""><summary><strong>1. Boolean Formatting:</strong></summary><p id="16056e01-f431-806c-9827-cc44e3e3a804" class=""><strong>Purpose:</strong> Formats and displays boolean values.           ُ</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80d4-939b-c8568fe0740c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.printf(&quot;%b%n&quot;, null);        // Output: false
+	System.out.printf(&quot;%B%n&quot;, false);       // Output: FALSE
+	System.out.printf(&quot;%B%n&quot;, 5.3);         // Output: TRUE
+	System.out.printf(&quot;%b%n&quot;, &quot;random text&quot;);// Output: true</code></pre></details></li></ul></div><div id="16056e01-f431-807f-827b-dab368945679" style="width:25%" class="column"><ul id="16056e01-f431-80ae-92f4-c230f38a3e14" class="toggle"><li><details open=""><summary><strong>2. String Formatting:</strong></summary><p id="16056e01-f431-8047-84ab-f8c96fe7bf54" class=""><strong>Purpose:</strong> Formats strings with optional uppercase conversion and field width.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8061-b99b-d4d9a0d6a371" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">printf(&quot;&#x27;%s&#x27; %n&quot;, &quot;baeldung&quot;);
+	// Output: &#x27;baeldung&#x27;
+	printf(&quot;&#x27;%S&#x27; %n&quot;, &quot;baeldung&quot;);
+	// Output: &#x27;BAELDUNG&#x27;
+	printf(&quot;&#x27;%15s&#x27; %n&quot;, &quot;baeldung&quot;);
+	// Output: &#x27;       baeldung&#x27;
+	
+	</code></pre></details></li></ul></div><div id="16056e01-f431-80e3-aade-cee04b36e528" style="width:25%" class="column"><ul id="16056e01-f431-80c5-8748-c9667ab1b8f2" class="toggle"><li><details open=""><summary><strong>3. Number Formatting:</strong></summary><p id="16056e01-f431-80c5-8960-e89251021b53" class=""><strong>Purpose:</strong> Formats numbers with grouping and precision.   </p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8065-bca8-f550e9425f6c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.printf(Locale.US, &quot;%,d %n&quot;, 10000);
+	// Output: 10,000
+	System.out.printf(Locale.ITALY, &quot;%,d %n&quot;, 10000);
+	// Output: 10.000
+	System.out.printf(&quot;&#x27;%5.2f&#x27;%n&quot;, 5.1473);          // Output: &#x27; 5.15&#x27;</code></pre></details></li></ul></div><div id="16056e01-f431-809d-84ce-fe09c77dafb5" style="width:25%" class="column"><ul id="16056e01-f431-80e5-8323-ddefe494f9f8" class="toggle"><li><details open=""><summary><strong>4. Date and Time Formatting:</strong></summary><p id="16056e01-f431-80f0-a73c-c61d3f9b24b3" class=""><strong>Purpose:</strong> Formats date and time using specific placeholders.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-804c-ae38-d36453bd7eb1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.printf(&quot;hours %tH: minutes %tM: seconds %tS%n&quot;, date, date, date);
+	// Output: hours 13: minutes 51: seconds 15
+	System.out.printf(&quot;%1$tA, %1$tB %1$tY %n&quot;, date);
+	// Output: Thursday, November 2018
+	</code></pre></details></li></ul></div></div><h3 id="16056e01-f431-807a-b514-d5e1957e0193" class=""><strong>Key Notes:</strong></h3><div id="16056e01-f431-80bf-8159-e50fc78b91bf" class="column-list"><div id="16056e01-f431-802a-a7a6-c956295a02db" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-8051-96fc-ecc0ca3a6b81" class="bulleted-list"><li style="list-style-type:disc"><code>%b</code> / <code>%B</code> : Boolean values (lowercase/uppercase).</li></ul><ul id="16056e01-f431-8021-b48b-faf6e8e2fb12" class="bulleted-list"><li style="list-style-type:disc"><code>%s</code> / <code>%S</code> : Strings (lowercase/uppercase).</li></ul></div><div id="16056e01-f431-808a-a4ca-f6112e3a3968" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-80e0-8d47-f9a5cc121965" class="bulleted-list"><li style="list-style-type:disc"><code>%d</code> : Integers with grouping (<code>Locale</code>).</li></ul><ul id="16056e01-f431-80dd-919b-fc55e18a4d8a" class="bulleted-list"><li style="list-style-type:disc"><code>%f</code> : Floating-point numbers (precision).</li></ul></div><div id="16056e01-f431-8053-b9a2-f07fee29d4b8" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-809b-8692-d3c6b8481601" class="bulleted-list"><li style="list-style-type:disc"><code>%tH</code>, <code>%tM</code>, <code>%tS</code> : Hours, Minutes, Seconds.</li></ul><ul id="16056e01-f431-802f-a402-fed1ccec8a32" class="bulleted-list"><li style="list-style-type:disc"><code>%tA</code>, <code>%tB</code>, <code>%tY</code> : Day, Month, Year.</li></ul></div></div><hr id="16056e01-f431-80ae-8f40-d18addb34ada"/><h2 id="16056e01-f431-805f-be84-edbb2e55ccc6" class="">3. <strong>Obtaining User Input</strong></h2><div id="16056e01-f431-80f7-aa4b-dab4bbdfdf2b" class="column-list"><div id="16056e01-f431-80c7-8c67-c1c7c0934831" style="width:37.5%" class="column"><ul id="16056e01-f431-8071-9199-c0d4005d469f" class="bulleted-list"><li style="list-style-type:disc"><strong>Using </strong><code><strong>Scanner</strong></code><strong> Class:</strong><ul id="16056e01-f431-803d-9518-ff7b17ac8433" class="bulleted-list"><li style="list-style-type:circle">Import: <code>import java.util.Scanner;</code></li></ul><ul id="16056e01-f431-80c1-8d79-cd2b5f988d3b" class="bulleted-list"><li style="list-style-type:circle">Create Scanner: <code>Scanner input = new Scanner(System.in);</code></li></ul></li></ul><ul id="16056e01-f431-8023-a8c8-ce24000a28ac" class="bulleted-list"><li style="list-style-type:disc"><strong>Reading Inputs:</strong><ul id="16056e01-f431-8077-98ba-d58490d510d1" class="bulleted-list"><li style="list-style-type:circle">Integer: <code>int number = input.nextInt();</code></li></ul><ul id="16056e01-f431-80c5-9493-c78314f370e5" class="bulleted-list"><li style="list-style-type:circle">Double: <code>double value = input.nextDouble();</code></li></ul><ul id="16056e01-f431-80d6-8afd-d8f38867602f" class="bulleted-list"><li style="list-style-type:circle">String: <code>String text = input.next();</code></li></ul><ul id="16056e01-f431-80ca-acbb-f1a1be1bcff2" class="bulleted-list"><li style="list-style-type:circle">Line: <code>String line = input.nextLine();</code></li></ul><p id="16056e01-f431-8080-b099-f34f9d9b975e" class="">
+	</p></li></ul></div><div id="16056e01-f431-801d-9744-f857b39d87f0" style="width:62.5%" class="column"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-800a-9c89-ec639f09a24d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import java.util.Scanner; // Import the Scanner class 
+	class Main { 
+		public static void main(String[] args) { 
+			Scanner input = new Scanner(System.in); // Create a Scanner object 
+			System.out.println(&quot;Enter username&quot;); 
+			String userName = input.nextLine(); // Read a line 
+			
+			System.out.println(&quot;Enter your age&quot;); 
+			int userAge = input.nextInt(); // Read an integer
+			
+			System.out.println(&quot;Enter user weight&quot;); 
+			double userWeight = input.nextDouble(); // Read a double 
+			
+			System.out.println(&quot;User name is: &quot; + userName); // Output user input 
+			System.out.println(&quot;User age is: &quot; + userAge); // Output user input 
+			System.out.println(&quot;Username is: &quot; + userWeight); // Output user input 
+		}
+	} </code></pre></div></div><hr id="16056e01-f431-8060-ac48-e7961dfb8325"/><h2 id="16056e01-f431-8054-b6eb-fec9de381a8c" class="">4. <strong>Importing Libraries</strong></h2><ul id="16056e01-f431-809f-b220-c366e2185be1" class="bulleted-list"><li style="list-style-type:disc">Java API Libraries provide pre-built methods and classes.</li></ul><ul id="16056e01-f431-80ae-9b35-c91cb71779b3" class="bulleted-list"><li style="list-style-type:disc">A key strength of Java is its rich set of predefined classes grouped into packages, allowing reuse instead of reinventing the wheel.</li></ul><ul id="16056e01-f431-80a4-9c4a-dc09b62a9a4a" class="bulleted-list"><li style="list-style-type:disc"><strong>Example: </strong>Import Scanner: <code>import java.util.Scanner;</code></li></ul><hr id="16056e01-f431-8020-ac34-fa751d790dd3"/><h2 id="16056e01-f431-80b5-aca1-d02739769066" class="">5. <strong>Commenting Code</strong></h2><ul id="16056e01-f431-806e-bdae-cad9ac6954a3" class="bulleted-list"><li style="list-style-type:disc"><strong>Single-line:</strong> <code>// This is a comment</code></li></ul><ul id="16056e01-f431-80e1-a4eb-eb38e4eba59f" class="bulleted-list"><li style="list-style-type:disc"><strong>Multi-line:</strong> <code>/* This is a multi-line comment */</code></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-800f-8aba-fc9b2816be3e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">/**
+	 * This method adds two numbers.
+	 * @param a First number
+	 * @param b Second number
+	 * @return Sum of a and b
+	 */</code></pre><hr id="16056e01-f431-80ff-b6e2-cb0b2adb5476"/><h2 id="16056e01-f431-80fc-8f15-db49a62a3b57" class="">6. <strong>Debugging and Tracing Errors</strong></h2><ul id="16056e01-f431-800e-8a61-da53916ff895" class="bulleted-list"><li style="list-style-type:disc"><strong>Debugging: </strong>is the routine process of locating and removing bugs, errors or abnormalities from programs.</li></ul><ul id="16056e01-f431-8095-a398-fec614cd5a32" class="bulleted-list"><li style="list-style-type:disc"><strong>Breakpoints: </strong>Pause program execution to inspect variables.</li></ul><ul id="16056e01-f431-80fa-8742-f56f8fb02203" class="bulleted-list"><li style="list-style-type:disc"><strong>Exception Breakpoints: </strong>Detect runtime exceptions like <code>NullPointerException</code>.</li></ul><ul id="16056e01-f431-8021-a49d-fa76122b2397" class="bulleted-list"><li style="list-style-type:disc"><strong>Watchpoints: </strong>Track when a variable&#x27;s value changes.</li></ul><ul id="16056e01-f431-80f1-9aac-f53386d0a72a" class="bulleted-list"><li style="list-style-type:disc"><strong>Debugging Tools: </strong>Use debugging features in <strong>NetBeans IDE</strong>.</li></ul><hr id="16056e01-f431-8057-ac32-f6127158f41a"/><h2 id="16056e01-f431-80e1-8957-e1b62bd56348" class=""><strong>7. Variables</strong></h2><ul id="16056e01-f431-8011-84b0-fcdad3ae41bb" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Location in memory that stores a value.</li></ul><ul id="16056e01-f431-808b-b6b0-e18060cf2a39" class="bulleted-list"><li style="list-style-type:disc"><strong>Rules:</strong><ul id="16056e01-f431-8095-af20-d22f947ecfca" class="bulleted-list"><li style="list-style-type:circle">Name must be a valid identifier (letters, digits, <code>_</code>, <code>$</code>).</li></ul><ul id="16056e01-f431-80bb-a7fd-fae4b1f71b05" class="bulleted-list"><li style="list-style-type:circle">Cannot begin with a digit or contain spaces.</li></ul><ul id="16056e01-f431-8052-8c7e-e3bf454b9862" class="bulleted-list"><li style="list-style-type:circle">Java is case-sensitive (<code>a1</code> ≠ <code>A1</code>).</li></ul></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-802d-bee9-e4aa07e737e4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int number1; // Declare variable
+	int number1, number2; // Multiple variables
+	int myNum = 15; // Declare and assign
+	final int CONSTANT = 10; // Final variable (read-only)</code></pre><hr id="16056e01-f431-80d3-ae78-c07b663813f2"/><h3 id="16056e01-f431-8072-a15a-fa8501ffd458" class=""><strong>Primitive Data Types in Java (Summary):</strong></h3><div id="16056e01-f431-8083-b0d6-c3c947fc1a14" class="column-list"><div id="16056e01-f431-8079-ae20-f686848da41e" style="width:25%" class="column"><ul id="16056e01-f431-80f8-ac93-c33d07613a67" class="toggle"><li><details open=""><summary><strong>Integers</strong></summary><ul id="16056e01-f431-80b1-9bda-eb6d4574ef2f" class="bulleted-list"><li style="list-style-type:disc">Store whole numbers (e.g., <code>72</code>, <code>1127</code>, <code>0</code>).</li></ul><p id="16056e01-f431-80f0-ba62-f1f345f1fbc6" class="">
+	</p></details></li></ul></div><div id="16056e01-f431-8071-9d5c-ecc299e5bbbf" style="width:25%" class="column"><ul id="16056e01-f431-80c7-863b-de1f6814c6db" class="toggle"><li><details open=""><summary><strong>Float &amp; Double</strong></summary><ul id="16056e01-f431-80f9-8613-cdf9109892e5" class="bulleted-list"><li style="list-style-type:disc">Store real numbers with decimals (e.g., <code>3.4</code>, <code>0.0</code>, <code>11.19</code>).</li></ul></details></li></ul></div><div id="16056e01-f431-803e-8e20-d17846336503" style="width:25%" class="column"><ul id="16056e01-f431-8085-bea9-e592befc7277" class="toggle"><li><details open=""><summary><strong>Char</strong></summary><ul id="16056e01-f431-8003-85ab-f3864444d0b8" class="bulleted-list"><li style="list-style-type:disc">Store single characters (e.g., <code>A</code>, <code>7</code>, <code></code>, <code>%</code>).</li></ul></details></li></ul></div><div id="16056e01-f431-8054-a8ff-edd2bdf65e3e" style="width:25%" class="column"><ul id="16056e01-f431-80ca-bf3a-e9476366c805" class="toggle"><li><details open=""><summary><strong>Boolean</strong></summary><ul id="16056e01-f431-800a-b991-d34f468a23e3" class="bulleted-list"><li style="list-style-type:disc">Store <strong>True</strong> or <strong>False</strong> values.</li></ul></details></li></ul></div></div><hr id="16056e01-f431-8020-b1a0-df35fa3559d9"/><p id="16056e01-f431-8084-85f3-d96448354eaf" class=""><strong>Note:</strong> There are eight primitive types: <code>boolean</code>, <code>byte</code>, <code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code>, and <code>double</code>.</p><table id="16056e01-f431-803e-ac7c-cf6b8ac87d05" class="simple-table"><thead class="simple-table-header"><tr id="16056e01-f431-80c1-a658-feeb84bfbe84"><th id="\L;I" class="simple-table-header-color simple-table-header" style="width:113px"><strong>Type</strong></th><th id="KGT&gt;" class="simple-table-header-color simple-table-header" style="width:131px"><strong>Width (bits)</strong></th><th id="&gt;&gt;x@" class="simple-table-header-color simple-table-header" style="width:528px"><strong>Range</strong></th></tr></thead><tbody><tr id="16056e01-f431-803d-8bdc-c7eff1555628"><th id="\L;I" class="simple-table-header-color simple-table-header" style="width:113px"><strong>long</strong></th><td id="KGT&gt;" class="" style="width:131px">64</td><td id="&gt;&gt;x@" class="" style="width:528px">-9,223,372,036,854,775,808 to 9,223,372,036,854,775,807</td></tr><tr id="16056e01-f431-80c0-9b19-e473e83ec382"><th id="\L;I" class="simple-table-header-color simple-table-header" style="width:113px"><strong>int</strong></th><td id="KGT&gt;" class="" style="width:131px">32</td><td id="&gt;&gt;x@" class="" style="width:528px">-2,147,483,648 to 2,147,483,647</td></tr><tr id="16056e01-f431-80be-b4f0-fd2791911e86"><th id="\L;I" class="simple-table-header-color simple-table-header" style="width:113px"><strong>short</strong></th><td id="KGT&gt;" class="" style="width:131px">16</td><td id="&gt;&gt;x@" class="" style="width:528px">-32,768 to 32,767</td></tr><tr id="16056e01-f431-8044-867f-e69e8cc420de"><th id="\L;I" class="simple-table-header-color simple-table-header" style="width:113px"><strong>byte</strong></th><td id="KGT&gt;" class="" style="width:131px">8</td><td id="&gt;&gt;x@" class="" style="width:528px">-128 to 127</td></tr></tbody></table><hr id="16056e01-f431-80e6-b1fc-f4952d6da0bd"/><h3 id="16056e01-f431-805e-8bcf-cb654094f968" class=""><strong>Final Variables in Java</strong></h3><ul id="16056e01-f431-8091-b26a-c2494fd9e235" class="bulleted-list"><li style="list-style-type:disc">Declaring a variable as <code><strong>final</strong></code> makes it <strong>constant</strong> (unchangeable and read-only).</li></ul><ul id="16056e01-f431-80a2-ac63-d6ec472ea316" class="bulleted-list"><li style="list-style-type:disc">Once assigned, its value <strong>cannot be modified</strong>.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-803a-8897-c5dd2724a6cf" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">final int myNum = 10;
+	myNum = 20; // Error: cannot assign a value to a final variable</code></pre><hr id="16056e01-f431-800b-ad09-e5f0238da489"/><h2 id="16056e01-f431-80bd-9404-df32f5d92d28" class=""><strong>8. Memory Concepts</strong></h2><ul id="16056e01-f431-802d-90b6-cfb5156941a0" class="bulleted-list"><li style="list-style-type:disc">Variables refer to memory locations.</li></ul><ul id="16056e01-f431-80ca-9ea0-cddac3c542ee" class="bulleted-list"><li style="list-style-type:disc">Assigning a value replaces the previous content in that location.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8091-9dda-deb523a24192" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int number1 = 45;
+	number1 = 72; // Replaces value 45 with 72</code></pre><hr id="16056e01-f431-8077-b288-f23dcb1805cc"/><h2 id="16056e01-f431-8068-b0ac-ebfd18e7d1fa" class=""><strong>9. Operators</strong></h2><ul id="16056e01-f431-8048-9119-cf80dee72a8d" class="bulleted-list"><li style="list-style-type:disc"><strong>Arithmetic Operators:</strong><ul id="16056e01-f431-805a-9f7d-c5f950c77dae" class="bulleted-list"><li style="list-style-type:circle">Addition (<code>+</code>), Subtraction (<code>-</code>), Multiplication (<code>*</code>), Division (<code>/</code>), Remainder (<code>%</code>).</li></ul><ul id="16056e01-f431-80df-bcce-f5f614c78d93" class="bulleted-list"><li style="list-style-type:circle">Integer division truncates the remainder.</li></ul></li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8023-af68-fd0df8d874c7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int result = 7 / 5; // result = 1
+	int remainder = 7 % 5; // remainder = 2</code></pre><ul id="16056e01-f431-804d-a747-e40b5ed11ee7" class="bulleted-list"><li style="list-style-type:disc"><strong>Precedence:</strong> Parentheses control the order of operations.<ul id="16056e01-f431-8058-af00-f81440a590f0" class="bulleted-list"><li style="list-style-type:circle">Multiplication, division, and remainder first (left-to-right).</li></ul><ul id="16056e01-f431-80e9-a0bf-d573b96ab9cc" class="bulleted-list"><li style="list-style-type:circle">Addition and subtraction next.</li></ul></li></ul><hr id="16056e01-f431-807c-a0f4-fc8cc54939e0"/><h3 id="16056e01-f431-80fd-9f28-ca4d0a1df71a" class=""><strong>Equality Operators:</strong></h3><ol type="1" id="16056e01-f431-808e-930d-df93b8fcfe61" class="numbered-list" start="1"><li><code>==</code> : Checks if two values are <strong>equal</strong>. | <strong>Example:</strong> <code>x == y</code> → <code>x</code> is equal to <code>y</code>.</li></ol><ol type="1" id="16056e01-f431-804b-af8b-f0ae59ae7929" class="numbered-list" start="2"><li><code>!=</code> : Checks if two values are <strong>not equal</strong>. | <strong>Example:</strong> <code>x != y</code> → <code>x</code> is not equal to <code>y</code>.</li></ol><hr id="16056e01-f431-8094-87de-e4d7a06848e7"/><h3 id="16056e01-f431-80f0-99c8-e03af7d87854" class=""><strong>Relational Operators:</strong></h3><ol type="1" id="16056e01-f431-80ce-9e68-fd9f93f4a3c8" class="numbered-list" start="1"><li><code>&gt;</code> : Checks if <strong>x is greater</strong> than <code>y</code>. | <strong>Example:</strong> <code>x &gt; y</code>.</li></ol><ol type="1" id="16056e01-f431-8068-b4e1-e356fc1452f3" class="numbered-list" start="2"><li><code>&lt;</code> : Checks if <strong>x is less</strong> than <code>y</code>. | <strong>Example:</strong> <code>x &lt; y</code>.</li></ol><ol type="1" id="16056e01-f431-80ea-8552-feb28a7e67a6" class="numbered-list" start="3"><li><code>&gt;=</code> : Checks if <strong>x is greater than or equal</strong> to <code>y</code>. | <strong>Example:</strong> <code>x &gt;= y</code>.</li></ol><ol type="1" id="16056e01-f431-8029-abb7-d2d8613b938e" class="numbered-list" start="4"><li><code>&lt;=</code> : Checks if <strong>x is less than or equal</strong> to <code>y</code>. | <strong>Example:</strong> <code>x &lt;= y</code>.</li></ol><hr id="16056e01-f431-80d7-8aae-d78a3425b56e"/><h2 id="16056e01-f431-80b2-8d37-c3a0205ff701" class=""><strong>10. Increment/Decrement Operators</strong></h2><ul id="16056e01-f431-80ea-8f2c-c9668738a1e7" class="bulleted-list"><li style="list-style-type:disc"><strong>Pre-Increment (</strong><code><strong>++x</strong></code><strong>):</strong> Increments before use.</li></ul><ul id="16056e01-f431-80b5-9933-ced93d75327f" class="bulleted-list"><li style="list-style-type:disc"><strong>Post-Increment (</strong><code><strong>x++</strong></code><strong>):</strong> Increments after use.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80e9-a551-fba741bcf61e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int b = 15, a;
+	
+	// Pre-Increment
+	a = ++b; // a = 16
+	
+	// Post-Increment
+	a = b++; // a = 15</code></pre><ul id="16056e01-f431-80ae-8e3f-f780e35cb2df" class="bulleted-list"><li style="list-style-type:disc">Similarly, <code><strong>-</strong></code> for decrement.</li></ul><hr id="16056e01-f431-80c7-bd54-ef42d298eb7d"/><h2 id="16056e01-f431-803a-b245-f4b561db8a69" class=""><strong>11. Assignment &amp; Expressions</strong></h2><ul id="16056e01-f431-805c-b2fd-ef49941e30be" class="bulleted-list"><li style="list-style-type:disc"><strong>Assignment Operator (</strong><code><strong>=</strong></code><strong>):</strong> Assigns a value.</li></ul><ul id="16056e01-f431-8023-8262-cb5adc4d820f" class="bulleted-list"><li style="list-style-type:disc"><strong>Compound Assignment (</strong><code><strong>+=</strong></code><strong>, </strong><code><strong>=</strong></code><strong>, etc.):</strong> Modifies and assigns.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8084-8f48-ef90de85603d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int x = 10;
+	x += 5; // x = x + 5 =&gt; x = 15</code></pre><table id="16056e01-f431-807e-9221-ddb6830d336d" class="simple-table"><thead class="simple-table-header"><tr id="16056e01-f431-80a4-85f4-f7b16bdb02df"><th id="EsHy" class="simple-table-header-color simple-table-header" style="width:142.5px">Operator</th><th id="G{Fn" class="simple-table-header-color simple-table-header" style="width:142.5px">=</th><th id="IDf[" class="simple-table-header-color simple-table-header" style="width:142.5px">+=</th><th id="b}cc" class="simple-table-header-color simple-table-header" style="width:142.5px">-=</th><th id="KK}l" class="simple-table-header-color simple-table-header" style="width:142.5px">*=</th><th id="cv]S" class="simple-table-header-color simple-table-header" style="width:142.5px">/=</th><th id="CiM[" class="simple-table-header-color simple-table-header" style="width:142.5px">%=</th><th id="oqG;" class="simple-table-header-color simple-table-header" style="width:142.5px">&amp;=</th><th id="vyCY" class="simple-table-header-color simple-table-header" style="width:142.5px">|=</th><th id="EnpF" class="simple-table-header-color simple-table-header" style="width:142.5px">^=</th><th id="][?i" class="simple-table-header-color simple-table-header" style="width:142.5px">&gt;&gt;=</th><th id="YfP^" class="simple-table-header-color simple-table-header" style="width:142.5px">&lt;&lt;=</th></tr></thead><tbody><tr id="16056e01-f431-80cb-b9c6-ef56a0ee70c9"><th id="EsHy" class="simple-table-header-color simple-table-header" style="width:142.5px">Example</th><td id="G{Fn" class="" style="width:142.5px">x = 5</td><td id="IDf[" class="" style="width:142.5px">x += 3</td><td id="b}cc" class="" style="width:142.5px">x -= 3</td><td id="KK}l" class="" style="width:142.5px">x *= 3</td><td id="cv]S" class="" style="width:142.5px">x /= 3</td><td id="CiM[" class="" style="width:142.5px">x %= 3</td><td id="oqG;" class="" style="width:142.5px">x &amp;= 3</td><td id="vyCY" class="" style="width:142.5px">x |= 3</td><td id="EnpF" class="" style="width:142.5px">x ^= 3</td><td id="][?i" class="" style="width:142.5px">x &gt;&gt;= 3</td><td id="YfP^" class="" style="width:142.5px">x &lt;&lt;= 3</td></tr><tr id="16056e01-f431-80dc-98ee-c13797e9a8f0"><th id="EsHy" class="simple-table-header-color simple-table-header" style="width:142.5px">Same As</th><td id="G{Fn" class="" style="width:142.5px">x = 5</td><td id="IDf[" class="" style="width:142.5px">x = x + 3</td><td id="b}cc" class="" style="width:142.5px">x = x - 3</td><td id="KK}l" class="" style="width:142.5px">x = x * 3</td><td id="cv]S" class="" style="width:142.5px">x = x / 3</td><td id="CiM[" class="" style="width:142.5px">x = x % 3</td><td id="oqG;" class="" style="width:142.5px">x = x &amp; 3</td><td id="vyCY" class="" style="width:142.5px">x = x | 3</td><td id="EnpF" class="" style="width:142.5px">x = x ^ 3</td><td id="][?i" class="" style="width:142.5px">x = x &gt;&gt; 3</td><td id="YfP^" class="" style="width:142.5px">x = x &lt;&lt; 3</td></tr></tbody></table><hr id="16056e01-f431-8009-99b6-c6500fafac34"/><h2 id="16056e01-f431-80eb-92ea-d01527338a29" class=""><strong>12. Logic and Syntax Errors</strong></h2><ul id="16056e01-f431-804f-b3b8-cf7ab8b19a15" class="bulleted-list"><li style="list-style-type:disc"><strong>Syntax Errors: </strong>Detected by the compiler (e.g., missing semicolon, parentheses).</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80a3-a701-f0fa3f11019a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.print // Missing parentheses
+	int x = 10 // Missing semicolon</code></pre><ul id="16056e01-f431-80e4-b37c-fe7ad59c9846" class="bulleted-list"><li style="list-style-type:disc"><strong>Logic Errors: </strong>Program compiles and runs but produces incorrect results.</li></ul><p id="16056e01-f431-806b-b636-da6bd0a82961" class="">Incorrect operator precedence:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80d5-9f25-da533cf0766c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int result = 5 + 4 * 3 / 2; // Incorrect result</code></pre><hr id="16056e01-f431-80ac-9b33-c4d10687a7e2"/><h2 id="16056e01-f431-80e0-8676-e30afcc2754f" class=""><strong>13. Debugging Concepts</strong></h2><ul id="16056e01-f431-804d-9032-f033a79d2f6c" class="bulleted-list"><li style="list-style-type:disc"><strong>Runtime Errors:</strong> Errors during program execution (e.g., divide by zero).<ul id="16056e01-f431-80aa-bc79-fff09e95522f" class="bulleted-list"><li style="list-style-type:circle">Example:</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8099-a9d3-c9705ec9b239" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int result = 15 / 0; // Runtime error</code></pre></li></ul><ul id="16056e01-f431-80b5-b34b-d2e6a8c4bc85" class="bulleted-list"><li style="list-style-type:disc">Debugging tools help identify and fix errors.</li></ul><hr id="16056e01-f431-8055-bcbf-d05ee6bd9bff"/><h3 id="16056e01-f431-8097-8c53-c264f246537d" class=""><strong>References:</strong></h3><ol type="1" id="16056e01-f431-8085-9ac8-e7506c72181e" class="numbered-list" start="1"><li><strong>Deitel, P. J., &amp; Deitel, H. M. (2017). </strong><em><strong>Java:</strong></em><em> How to Program Late Objects</em>. Pearson.</li></ol><ol type="1" id="16056e01-f431-8026-aa16-f7985e22bbca" class="numbered-list" start="2"><li><strong>Java Variables and Data Types:</strong> <a href="https://www.javatpoint.com/java-data-types">javatpoint</a></li></ol><ol type="1" id="16056e01-f431-8084-8d8e-fb3a53b85958" class="numbered-list" start="3"><li><strong>Java API Documentation: </strong><a href="https://docs.oracle.com/javase/7/docs/api/index.html">Access Java API Docs</a></li></ol><ol type="1" id="16056e01-f431-80f9-adb0-ecd2d5220be6" class="numbered-list" start="4"><li><strong>Debugging Guide for NetBeans: </strong><a href="https://medium.com/@teguhteja/how-to-debugging-in-netbeans-java-c3087d9e2f6c">NetBeans Debugging Tutorial</a></li></ol><ol type="1" id="16056e01-f431-806f-b8d4-f36c2e05b138" class="numbered-list" start="5"><li><strong>Formatted Output in Java: </strong><a href="https://www.baeldung.com/java-printstream-printf">Baeldung Java Printf Guide</a></li></ol><p id="16056e01-f431-8039-88ae-e35822649a33" class="">
+	</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

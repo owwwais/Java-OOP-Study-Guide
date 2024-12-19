@@ -1,0 +1,760 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Classes and Objects</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 90%;
+			color: rgb(55, 53, 47);
+		}
+	}
+
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-bottom: 2em;
+	}
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-default_background {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-default_background {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+	.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="16056e01-f431-8075-ab78-ef0fdfa011bb" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1517650862521-d580d5348145?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><h1 class="page-title">Classes and Objects</h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><h2 id="16056e01-f431-800f-a15b-d9d6c2b3f984" class=""><strong>1. Declaring Classes, Instance Variables, and Methods</strong></h2><p id="16056e01-f431-80b6-b8a3-e6780be4e5c2" class=""><strong>Class:</strong> A blueprint for creating objects.<div class="indented"><ul id="16056e01-f431-8060-b790-ee88014844ea" class="bulleted-list"><li style="list-style-type:disc">Contains fields, methods, constructors, Blocks, and nested classes.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80a3-9bce-c62d1d4dbc75" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Lamp {
+		boolean isOn; // Instance variable
+		void turnOn() { isOn = true; }
+		void turnOff() { isOn = false; }
+	}</code></pre></li></ul></div></p><p id="16056e01-f431-80f3-8508-d6f8f7e77591" class=""><strong>Object:</strong> is an <strong>instance</strong> of a class, created from a blueprint (class).<div class="indented"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80ec-9c09-e2803fc0ae73" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Lamp led = new Lamp(); // Create object
+	led.turnOn();</code></pre></div></p><p id="16056e01-f431-8032-9ade-fae74fcc3f85" class=""><strong>Instance Variables:</strong><div class="indented"><ul id="16056e01-f431-80de-ba5f-db40f28c5624" class="bulleted-list"><li style="list-style-type:disc">Declared inside a class but outside any method.</li></ul><ul id="16056e01-f431-8002-affb-c4c9851e0ff5" class="bulleted-list"><li style="list-style-type:disc">Memory is allocated when an object is created.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80f6-bea3-d46c5f5621b4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class Student {
+		int rollNo; // Instance variable
+	}</code></pre></div></p><hr id="16156e01-f431-8021-a94a-efb0432a9176"/><h3 id="16156e01-f431-8062-82f9-f1a699a6413d" class=""><strong>Access Modifiers: </strong><code><strong>public</strong></code><strong> and </strong><code><strong>private</strong></code></h3><div id="16156e01-f431-807c-ad6a-fd842cdc2035" class="column-list"><div id="16156e01-f431-8083-b19a-f87aa0407358" style="width:50%" class="column"><ul id="16156e01-f431-80f1-acb0-c7b16ff36474" class="toggle"><li><details open=""><summary><code>public</code>:</summary><ul id="16156e01-f431-808e-a780-f99afe1afee3" class="bulleted-list"><li style="list-style-type:disc">Variables or methods declared as <code>public</code> are <strong>accessible from outside the class</strong>.</li></ul><ul id="16156e01-f431-80a5-97d9-edd3852e361f" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16156e01-f431-808d-82aa-cf16326d542d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class MyClass {
+		public int number = 10;
+		public void display() {
+			System.out.println(number);
+		}
+	}</code></pre></li></ul></details></li></ul></div><div id="16156e01-f431-80c7-b036-c9e164667896" style="width:50%" class="column"><ul id="16156e01-f431-802d-a579-d72ab0dc5c58" class="toggle"><li><details open=""><summary><code>private</code>:</summary><ul id="16156e01-f431-80e3-9294-cd1feda7a57a" class="bulleted-list"><li style="list-style-type:disc">Variables or methods declared as <code>private</code> are <strong>accessible only within the class</strong> where they’re declared.</li></ul><ul id="16156e01-f431-80a0-9b0e-e4d1e047a300" class="bulleted-list"><li style="list-style-type:disc"><strong>Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16156e01-f431-80ff-8f45-e31cbed584b8" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class MyClass {
+		private int number = 10;
+		private void display() {
+			System.out.println(number);
+		}
+	}</code></pre></li></ul></details></li></ul></div></div><ul id="16156e01-f431-801e-afdc-ef9d4deba8a4" class="bulleted-list"><li style="list-style-type:disc"><code>public</code>: Accessible everywhere.</li></ul><ul id="16156e01-f431-80e7-94d3-e408ab165716" class="bulleted-list"><li style="list-style-type:disc"><code>private</code>: Accessible only within the class.</li></ul><hr id="16156e01-f431-8087-90b3-ee409decff51"/><h2 id="16056e01-f431-8082-8178-de9c72cd59a7" class=""><strong>2. Default and Explicit Initialization for Instance Variables</strong></h2><ul id="16056e01-f431-804e-8997-dff05db8d06c" class="bulleted-list"><li style="list-style-type:disc"><strong>Default Initialization:</strong><ul id="16056e01-f431-8093-a924-ec31749ed6fb" class="bulleted-list"><li style="list-style-type:circle">Primitive types:<ul id="16056e01-f431-8079-b79f-fd77b4660f32" class="bulleted-list"><li style="list-style-type:square"><code>int</code>, <code>long</code>, <code>float</code> → <code>0</code></li></ul><ul id="16056e01-f431-802f-995d-ef25b3bb43c6" class="bulleted-list"><li style="list-style-type:square"><code>boolean</code> → <code>false</code></li></ul></li></ul><ul id="16056e01-f431-8026-a669-e4358436d8e4" class="bulleted-list"><li style="list-style-type:circle">Reference types → <code>null</code></li></ul></li></ul><ul id="16056e01-f431-801d-a1de-f8eefc2a79be" class="bulleted-list"><li style="list-style-type:disc"><strong>Explicit Initialization:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80fc-a97c-f1b8dd752f62" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class MyClass {
+		int x = 10; // Explicit initialization
+	}</code></pre></li></ul><hr id="16056e01-f431-803c-b0a5-efb31f0e3010"/><h2 id="16056e01-f431-8011-b059-ce068a4e28cb" class=""><strong>3. Constructors</strong></h2><ul id="16056e01-f431-8069-b071-e42ba83ef4bc" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Special methods to initialize objects.<ul id="16056e01-f431-8033-9b86-f60b4d6c2ea7" class="bulleted-list"><li style="list-style-type:circle">Same name as the class, no return type.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-807f-8a83-ce8a8aeea093" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class MyClass {
+		int x;
+		MyClass(int value) { x = value; } // Constructor
+	}</code></pre></li></ul></li></ul><ul id="16056e01-f431-803f-af10-ea8b51d2d18e" class="bulleted-list"><li style="list-style-type:disc"><strong>Parameterized Constructor Example:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80b2-ba46-f2ce5c05ef01" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">MyClass obj = new MyClass(100); // Passing argument to constructor</code></pre></li></ul><ul id="16056e01-f431-80c9-adfe-d853207c50c8" class="bulleted-list"><li style="list-style-type:disc"><strong>Static Variables and Methods:</strong><ul id="16056e01-f431-8028-8052-d0228b6c28d5" class="bulleted-list"><li style="list-style-type:circle"><strong>Static Variables:</strong> Shared among all objects.</li></ul><ul id="16056e01-f431-809b-8e91-dd50ae8063ce" class="bulleted-list"><li style="list-style-type:circle"><strong>Static Methods:</strong> Associated with the class, not objects.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-801f-bcf9-c2fa3d7d01b6" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Calculate {
+		static int cube(int x) { return x * x * x; }
+	}</code></pre></li></ul></li></ul><hr id="16056e01-f431-80b5-ac87-cf823da76b9f"/><h3 id="16156e01-f431-8016-b30c-f2387709328a" class=""><strong>Access Levels for Modifiers</strong></h3><ul id="16156e01-f431-8096-a95c-c6f4d7661fe3" class="bulleted-list"><li style="list-style-type:disc"><code>Default</code>: Accessible within the same package (subclass &amp; non-subclass).</li></ul><ul id="16156e01-f431-8032-b14b-eda32f6b3dae" class="bulleted-list"><li style="list-style-type:disc"><code>Private</code>: Accessible only within the same class.</li></ul><ul id="16156e01-f431-80b4-a5a0-e7b2598f4e6c" class="bulleted-list"><li style="list-style-type:disc"><code>Protected</code>: Accessible in the same package or subclass (even in a different package).</li></ul><ul id="16156e01-f431-8063-8f0d-d5eb19ac7413" class="bulleted-list"><li style="list-style-type:disc"><code>Public</code>: Accessible from anywhere.</li></ul><h3 id="16156e01-f431-8067-b8f1-d5dea5fbc261" class="">Key Takeaways:</h3><ul id="16156e01-f431-80e3-8d17-f819a03a2e6e" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Public</strong></code><strong>:</strong> Use for global access.</li></ul><ul id="16156e01-f431-805c-9846-efc80b522522" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Private</strong></code><strong>:</strong> Use for encapsulation and restricting access.</li></ul><ul id="16156e01-f431-8084-877f-d704a4ef10d4" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Protected</strong></code><strong>:</strong> Use for inheritance with controlled access.</li></ul><ul id="16156e01-f431-80cc-aca3-c63fa36345f3" class="bulleted-list"><li style="list-style-type:disc"><code><strong>Default</strong></code><strong>:</strong> Use for internal package access.</li></ul><hr id="16156e01-f431-80cd-afac-f2debbce6039"/><h2 id="16056e01-f431-803e-af52-de1809fb51f2" class=""><strong>4. Instantiating and Using Objects</strong></h2><ul id="16056e01-f431-803f-bdf4-e45d8eb8d990" class="bulleted-list"><li style="list-style-type:disc">Objects are created using the <code>new</code> keyword:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-803a-bf00-ff5c97a90f5d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">Lamp led = new Lamp(); // Object of Lamp class
+	led.turnOn(); // Call method
+	</code></pre></li></ul><ul id="16056e01-f431-8063-adf6-ed9ee14dfe3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Access Modifiers:</strong><ul id="16056e01-f431-80c4-a040-cfb6d3af6de0" class="bulleted-list"><li style="list-style-type:circle"><code>public</code>: Accessible everywhere.</li></ul><ul id="16056e01-f431-807e-ab01-e9dcedee929a" class="bulleted-list"><li style="list-style-type:circle"><code>private</code>: Accessible only within the class.</li></ul></li></ul><hr id="16056e01-f431-8038-9321-c9b736517d2e"/><h2 id="16056e01-f431-80dc-a384-dd0cb27fd4ac" class=""><strong>5. Implementing a Test Class</strong></h2><ul id="16056e01-f431-80f0-9ef9-cb95dac0b13c" class="toggle"><li><details open=""><summary><strong>Example 1: Lamp Class</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80a4-98ef-df4f87e3b93d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Lamp {
+		boolean isOn;
+		void turnOn() { isOn = true; System.out.println(&quot;Light on? &quot; + isOn); }
+		void turnOff() { isOn = false; System.out.println(&quot;Light on? &quot; + isOn); }
+	}
+	public class Main {
+		public static void main(String[] args) {
+			Lamp led = new Lamp();
+			led.turnOn();
+		}
+	}</code></pre><p id="16056e01-f431-8057-9d8f-e02535a812ac" class=""><strong>Output:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-801e-8e44-e68ef37dfd2c" class="code"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">Light on? true</code></pre></details></li></ul><ul id="16056e01-f431-80b4-b977-e07c06995ce3" class="toggle"><li><details open=""><summary><strong>Example 2: Account Class</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-807a-94bf-d7c2664aab10" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Account {
+		int accNo;
+		String name;
+		float balance;
+	
+		void insert(int accNo, String name, float balance) {
+			this.accNo = accNo;
+			this.name = name;
+			this.balance = balance;
+		}
+	}</code></pre></details></li></ul><hr id="16056e01-f431-80e6-8aaa-eb6bcd689230"/><h2 id="16056e01-f431-8087-bad5-e0c7652fea3e" class=""><strong>6. </strong><code><strong>this</strong></code><strong> Reference</strong></h2><ul id="16056e01-f431-80d6-b160-ed8a1c809068" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Refers to the current object instance in a method or constructor.</li></ul><ul id="16056e01-f431-80ae-bf78-d3950f748665" class="bulleted-list"><li style="list-style-type:disc"><strong>Use Cases:</strong><ul id="16056e01-f431-8010-a256-ea402206813c" class="bulleted-list"><li style="list-style-type:circle">Distinguishes between instance variables and parameters with the same name.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80c8-8303-e0ffbd0eaf69" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Student {
+		int rollno;
+		String name;
+		Student(int rollno, String name) {
+			this.rollno = rollno;
+			this.name = name;
+		}
+	}</code></pre></li></ul><ul id="16056e01-f431-809d-9de4-f09459d7fab9" class="bulleted-list"><li style="list-style-type:disc"><strong>Calling Constructors Using </strong><code><strong>this()</strong></code><strong>:</strong><ul id="16056e01-f431-8047-bd99-cb46e806d2c8" class="bulleted-list"><li style="list-style-type:circle">Calls another constructor in the same class.</li></ul><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80ef-ad10-c4a821d39033" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class A {
+		A() { System.out.println(&quot;Hello A&quot;); }
+		A(int x) { this(); System.out.println(x); }
+	}</code></pre></li></ul><hr id="16056e01-f431-80f3-9bc5-ebb4b59e73a1"/><h2 id="16056e01-f431-80ee-be3e-cf67d47c21e5" class=""><strong>7. Overloaded Constructors</strong></h2><ul id="16056e01-f431-80ef-9cac-f14d68dfa3db" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Multiple constructors in the same class with different parameter lists.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-807a-b200-d855ff5528a1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Demo {
+		int value1, value2;
+		Demo() { value1 = 10; value2 = 20; }
+		Demo(int a) { value1 = a; }
+		Demo(int a, int b) { value1 = a; value2 = b; }
+	}</code></pre></li></ul><hr id="16056e01-f431-805c-915c-daea05aef6d2"/><h2 id="16056e01-f431-8095-bb90-eb92d40c6508" class=""><strong>8. Default and No-Argument Constructors</strong></h2><ul id="16056e01-f431-80ef-8fdf-cef6466e34df" class="bulleted-list"><li style="list-style-type:disc"><strong>Default Constructor:</strong> Created automatically by the Java compiler if no constructor is defined.</li></ul><ul id="16056e01-f431-80de-b216-cd7d924e23f1" class="bulleted-list"><li style="list-style-type:disc"><strong>No-Argument Constructor:</strong> Explicitly defined constructor with no parameters.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80e0-b58c-d3f1d449ee86" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class MyClass {
+		int x;
+		MyClass() { x = 0; } // No-Argument Constructor
+	}</code></pre></li></ul><hr id="16056e01-f431-80c8-b665-cd390d394b25"/><h3 id="16056e01-f431-80c3-a72d-d6c1ff9186f7" class=""><strong>9. Composition</strong></h3><ul id="16056e01-f431-8053-8c4f-cea6403d175c" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> A class can include objects of other classes as members.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8004-a5e5-c8d8a8438c26" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class AlarmClock {
+		Time currentTime;
+		Time alarmTime;
+	}</code></pre></li></ul><hr id="16056e01-f431-8002-8c8f-d8b421b141b5"/><h2 id="16056e01-f431-80b1-a675-c78124393f5e" class=""><strong>10. </strong><code><strong>enum</strong></code><strong> Types</strong></h2><ul id="16056e01-f431-807b-b428-c82456db5680" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Defines a set of constants as unique identifiers.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-801f-a8de-cdc6848d3e6e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public enum Level { LOW, MEDIUM, HIGH }
+	Level myVar = Level.MEDIUM;</code></pre></li></ul><ul id="16056e01-f431-8023-a153-c1c11e6e73ef" class="bulleted-list"><li style="list-style-type:disc">Traversing Enum:<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80cc-bace-ec05c277ab37" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">for (Level l : Level.values()) System.out.println(l);</code></pre></li></ul><hr id="16056e01-f431-8008-b5b4-d26f95f7c37a"/><h2 id="16056e01-f431-8091-9310-faadb3b79983" class=""><strong>11. Garbage Collection</strong></h2><ul id="16056e01-f431-80a0-9436-df96ed6870ea" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Automatically reclaims unused memory in Java.</li></ul><ul id="16056e01-f431-8003-a7ff-c3b136dc6c33" class="bulleted-list"><li style="list-style-type:disc"><strong>Finalizer Method: </strong>Cleans up resources before an object is garbage collected.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8023-a2c3-d50090e15501" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">protected void finalize() { System.out.println(&quot;Garbage Collected&quot;); }</code></pre></li></ul><hr id="16056e01-f431-80cc-893b-eeb121097aad"/><h2 id="16056e01-f431-80f9-a5eb-e2d75e25744d" class=""><strong>12. Static Class Members &amp; Static Import</strong></h2><ul id="16056e01-f431-8016-95ae-f93ccf1a2986" class="bulleted-list"><li style="list-style-type:disc"><strong>Static Members:</strong> Shared across all objects of a class.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-802d-9a9f-e733ae787df2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Calculate {
+		static int cube(int x) { return x * x * x; }
+	}</code></pre></li></ul><ul id="16056e01-f431-8057-9e91-e36ef5461119" class="bulleted-list"><li style="list-style-type:disc"><strong>Static Import:</strong> Allows importing static members for direct access.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80c1-ad81-de6150816e5a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import static java.lang.Math.*;
+	System.out.println(sqrt(16));</code></pre></li></ul><hr id="16056e01-f431-80ec-8df0-fcb47b7b81d8"/><h2 id="16056e01-f431-8037-9705-f05e1c3eabea" class=""><strong>13. Final Instance Variables</strong></h2><ul id="16056e01-f431-80d2-ba98-cb16696be114" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Declares a variable as constant (cannot be modified).<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8098-b307-ff888ca20b8f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Bike {
+		final int speedLimit = 90;
+	}</code></pre></li></ul><hr id="16056e01-f431-802f-8625-d578bfa882aa"/><h2 id="16056e01-f431-80ce-8fef-ca96f4d6e413" class=""><strong>14. Creating Packages</strong></h2><ul id="16056e01-f431-80d0-90de-cf9cde16a6ff" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Groups related classes and interfaces to manage complexity and promote reuse.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-804e-81c4-e23099320a27" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">package mypack;
+	public class MyClass { public void msg() { System.out.println(&quot;Hello&quot;); } }</code></pre></li></ul><hr id="16056e01-f431-804f-ae5e-dd4d7193449c"/><h3 id="16056e01-f431-8076-a461-de682bd9cb46" class=""><strong>References:</strong></h3><ol type="1" id="16056e01-f431-8076-a96c-e27ebeea2da0" class="numbered-list" start="1"><li>Deitel, P. J., &amp; Deitel, H. M. (2017). <em>Java: How to Program Late Objects</em>. Pearson.</li></ol><ol type="1" id="16056e01-f431-803e-a677-c47925f69958" class="numbered-list" start="2"><li><a href="https://www.geeksforgeeks.org/final-static-variable-java/">Final and Static Variables</a></li></ol><ol type="1" id="16056e01-f431-800b-9025-f9e9dd6ceb94" class="numbered-list" start="3"><li><a href="https://beginnersbook.com/2013/04/java-garbage-collection/">Java Garbage Collection</a></li></ol><ol type="1" id="16056e01-f431-80fa-b1be-e60fd196cbc7" class="numbered-list" start="4"><li>Java Tutorials: <a href="https://www.w3schools.com/java/java_classes.asp">Java Classes</a></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

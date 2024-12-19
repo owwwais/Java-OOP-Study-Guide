@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java OOP Quiz</title>
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+            --background-light: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-light);
+            color: var(--text-primary);
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-header h1 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-header p {
+            color: var(--text-secondary);
+            margin-top: 0;
+        }
+
+        .question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--background-light);
+        }
+
+        .question h3 {
+            margin-top: 0;
+            color: var(--text-primary);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(0, 122, 255, 0.1);
+        }
+
+        .option.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+        }
+
+        .results {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Java OOP Quiz</h1>
+            <p id="quiz-info"></p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+        <div id="question-container"></div>
+        <div class="button-group">
+            <button id="prev-btn" onclick="previousQuestion()" disabled>Previous</button>
+            <button id="next-btn" onclick="nextQuestion()">Next</button>
+            <button id="submit-btn" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+        </div>
+        <div id="results" class="results" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedTopic = urlParams.get('topic');
+        const questionCount = parseInt(urlParams.get('count')) || 10; // Default to 10 if not specified
+
+        // All available questions organized by week
+        let allQuestions = [
+            // Week 2: Introduction to Computer Science
+            {
+                question: "What does the ALU stand for?",
+                options: [
+                    "Arithmetic Logic Unit",
+                    "Application Logic Unit",
+                    "Array Logic Unit",
+                    "Advanced Logic Unit"
+                ],
+                answer: "Arithmetic Logic Unit",
+                week: "week2"
+            },
+            {
+                question: "Which of the following is an example of secondary storage?",
+                options: [
+                    "RAM",
+                    "Hard Disk",
+                    "CPU",
+                    "Cache"
+                ],
+                answer: "Hard Disk",
+                week: "week2"
+            },
+            {
+                question: "Which edition of Java is used for large-scale web-based applications?",
+                options: [
+                    "Java SE",
+                    "Java EE",
+                    "Java ME",
+                    "None of the above"
+                ],
+                answer: "Java EE",
+                week: "week2"
+            },
+            {
+                question: "What is the main purpose of an operating system?",
+                options: [
+                    "To execute high-level code",
+                    "To manage computer resources and applications",
+                    "To translate machine code",
+                    "To write Java programs"
+                ],
+                answer: "To manage computer resources and applications",
+                week: "week2"
+            },
+            // Week 3: Introduction to Java Applications I
+            {
+                question: "Which method is used to take input from the user in Java?",
+                options: [
+                    "System.out.println",
+                    "System.in.read",
+                    "Scanner",
+                    "BufferedReader"
+                ],
+                answer: "Scanner",
+                week: "week3"
+            },
+            {
+                question: "Which of the following is NOT a valid comment in Java?",
+                options: [
+                    "// Single-line comment",
+                    "/* Multi-line comment */",
+                    "/** Documentation comment */",
+                    "<!-- HTML-style comment -->"
+                ],
+                answer: "<!-- HTML-style comment -->",
+                week: "week3"
+            },
+            // Week 4: Introduction to Java Applications II
+            {
+                question: "Which data type is used for storing single characters in Java?",
+                options: [
+                    "String",
+                    "char",
+                    "int",
+                    "boolean"
+                ],
+                answer: "char",
+                week: "week4"
+            },
+            {
+                question: "Which operator is used to calculate the remainder in Java?",
+                options: [
+                    "/",
+                    "%",
+                    "//",
+                    "^"
+                ],
+                answer: "%",
+                week: "week4"
+            },
+            // Week 5: Control Statements I
+            {
+                question: "Which statement is used to end a 'switch' case?",
+                options: [
+                    "stop",
+                    "end",
+                    "break",
+                    "exit"
+                ],
+                answer: "break",
+                week: "week5"
+            },
+            // Week 6: Control Statements II
+            {
+                question: "Which of the following loops is executed at least once?",
+                options: [
+                    "for",
+                    "while",
+                    "do-while",
+                    "None of the above"
+                ],
+                answer: "do-while",
+                week: "week6"
+            },
+            {
+                question: "What does the 'continue' statement do in a loop?",
+                options: [
+                    "Exits the loop",
+                    "Skips to the next iteration",
+                    "Repeats the current iteration",
+                    "None of the above"
+                ],
+                answer: "Skips to the next iteration",
+                week: "week6"
+            },
+            // Week 7: Methods (Part 1)
+            {
+                question: "Which keyword is used to define a method that does not return any value?",
+                options: [
+                    "return",
+                    "void",
+                    "null",
+                    "none"
+                ],
+                answer: "void",
+                week: "week7"
+            },
+            {
+                question: "What is the correct syntax for declaring a method in Java?",
+                options: [
+                    "methodName(parameters)",
+                    "returnType methodName(parameters)",
+                    "methodName returnType(parameters)",
+                    "parameters methodName(returnType)"
+                ],
+                answer: "returnType methodName(parameters)",
+                week: "week7"
+            },
+            // Week 8: Methods (Part 2)
+            {
+                question: "Which of the following is NOT a valid access modifier in Java?",
+                options: [
+                    "public",
+                    "protected",
+                    "internal",
+                    "private"
+                ],
+                answer: "internal",
+                week: "week8"
+            },
+            {
+                question: "What is the main purpose of the 'static' keyword in a method?",
+                options: [
+                    "To make the method available only to specific instances",
+                    "To allow the method to be called without creating an object of the class",
+                    "To ensure the method is executed once",
+                    "To protect the method from modification"
+                ],
+                answer: "To allow the method to be called without creating an object of the class",
+                week: "week8"
+            },
+            // Week 10: Arrays
+            {
+                question: "What is the default value of an uninitialized integer array in Java?",
+                options: [
+                    "0",
+                    "null",
+                    "undefined",
+                    "It depends on the size of the array"
+                ],
+                answer: "0",
+                week: "week10"
+            },
+            {
+                question: "Which of the following is a correct way to declare a two-dimensional array in Java?",
+                options: [
+                    "int arr[2][3]",
+                    "int arr = new int[2][3]",
+                    "int[][] arr = new int[2][3]",
+                    "int[2,3] arr"
+                ],
+                answer: "int[][] arr = new int[2][3]",
+                week: "week10"
+            },
+            // Week 11: Classes and Objects I
+            {
+                question: "Which of the following is NOT a characteristic of a constructor?",
+                options: [
+                    "Has the same name as the class",
+                    "Has no return type",
+                    "Can be called explicitly",
+                    "Can have a different name from the class"
+                ],
+                answer: "Can have a different name from the class",
+                week: "week11"
+            },
+            // Week 12: Classes and Objects II
+            {
+                question: "What is the primary use of the 'this' keyword in Java?",
+                options: [
+                    "To refer to the superclass",
+                    "To refer to the current object",
+                    "To call a static method",
+                    "To declare variables"
+                ],
+                answer: "To refer to the current object",
+                week: "week12"
+            },
+            // Week 13: Inheritance and Polymorphism
+            {
+                question: "What is the main purpose of inheritance in Java?",
+                options: [
+                    "To achieve code reusability",
+                    "To restrict object creation",
+                    "To allow multiple inheritance",
+                    "To create anonymous classes"
+                ],
+                answer: "To achieve code reusability",
+                week: "week13"
+            },
+            // Week 14: Strings and Characters
+            {
+                question: "Which method is used to find the length of a string in Java?",
+                options: [
+                    "size()",
+                    "length()",
+                    "getSize()",
+                    "getLength()"
+                ],
+                answer: "length()",
+                week: "week14"
+            },
+            // Week 15: Recursion
+            {
+                question: "What is the base case in a recursive function?",
+                options: [
+                    "A condition that repeats indefinitely",
+                    "The condition that stops the recursion",
+                    "The starting point of a loop",
+                    "None of the above"
+                ],
+                answer: "The condition that stops the recursion",
+                week: "week15"
+            }
+        ];
+
+        // Filter questions based on selected topic
+        if (selectedTopic !== 'all') {
+            allQuestions = allQuestions.filter(q => q.week === selectedTopic);
+        }
+
+        // Shuffle and limit questions to the selected count
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle and select questions
+        let questions = shuffleArray([...allQuestions]).slice(0, Math.min(questionCount, allQuestions.length));
+        
+        let currentQuestion = 0;
+        let answers = new Array(questions.length).fill(null);
+
+        // Update UI
+        updateQuizInfo();
+        showQuestion();
+
+        function updateQuizInfo() {
+            const info = document.getElementById('quiz-info');
+            info.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            
+            // Update progress bar
+            const progress = document.getElementById('progress');
+            progress.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            const container = document.getElementById('question-container');
+            
+            let html = `
+                <div class="question">
+                    <h3>${question.question}</h3>
+                    <div class="options">
+            `;
+            
+            question.options.forEach((option, index) => {
+                const selected = answers[currentQuestion] === option ? 'selected' : '';
+                html += `
+                    <div class="option ${selected}" onclick="selectOption(${index})">
+                        ${option}
+                    </div>
+                `;
+            });
+            
+            html += `</div></div>`;
+            container.innerHTML = html;
+            
+            // Update buttons
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').style.display = currentQuestion === questions.length - 1 ? 'none' : 'block';
+            document.getElementById('submit-btn').style.display = currentQuestion === questions.length - 1 ? 'block' : 'none';
+            
+            updateQuizInfo();
+        }
+
+        function selectOption(index) {
+            answers[currentQuestion] = questions[currentQuestion].options[index];
+            showQuestion();
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            const results = document.getElementById('results');
+            let feedback = '<h2>Quiz Results</h2>';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = answers[index];
+                const correctAnswer = question.answer;
+                
+                if (userAnswer === correctAnswer) {
+                    score++;
+                }
+                
+                feedback += `
+                    <div class="question ${userAnswer === correctAnswer ? 'correct' : 'incorrect'}">
+                        <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
+                        <p>Your answer: ${userAnswer || 'Not answered'}</p>
+                        <p>Correct answer: ${correctAnswer}</p>
+                    </div>
+                `;
+            });
+            
+            const percentage = (score / questions.length) * 100;
+            feedback = `
+                <div class="score">${percentage.toFixed(1)}%</div>
+                <div class="feedback">You got ${score} out of ${questions.length} questions correct!</div>
+                ${feedback}
+            `;
+            
+            results.innerHTML = feedback;
+            results.style.display = 'block';
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('prev-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

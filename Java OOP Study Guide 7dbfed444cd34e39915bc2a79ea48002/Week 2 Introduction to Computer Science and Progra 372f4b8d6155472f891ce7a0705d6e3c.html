@@ -1,0 +1,690 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Week 2: Introduction to Computer Science and Programming</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 90%;
+			color: rgb(55, 53, 47);
+		}
+	}
+	
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-bottom: 2em;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-default_background {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-default_background {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+	.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style>
+	</head>
+	<body>
+		<article id="372f4b8d-6155-472f-891c-e7a0705d6e3c" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1675495666895-9091741bfd78?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><h1 class="page-title"><strong>Introduction to Computer Science and Programming</strong></h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><ol type="1" id="16056e01-f431-8074-9b75-d459d155602e" class="numbered-list" start="1"><li><a href="Week-2-Introduction-to-Computer-Science-and-Programming-372f4b8d6155472f891ce7a0705d6e3c?pvs=21">Introduction to Hardware and Software</a></li></ol><ol type="1" id="16056e01-f431-801b-b790-f77599da6cc4" class="numbered-list" start="2"><li><a href="">Low-Level and High-Level Programming Languages</a></li></ol><ol type="1" id="16056e01-f431-802a-80e2-c826f7bf5f4d" class="numbered-list" start="3"><li><a href="">Operating Systems</a></li></ol><ol type="1" id="16056e01-f431-8001-8f30-fe29f6b06da6" class="numbered-list" start="4"><li><a href="">Java Development Environment</a></li></ol><ol type="1" id="16056e01-f431-8022-8d5c-c56d0d25ff10" class="numbered-list" start="5"><li><a href="">Internet and World Wide Web</a></li></ol><hr id="16056e01-f431-80de-bb6b-e69e488845b5"/><h3 id="16056e01-f431-804a-a6c2-c783b4e8765a" class=""><strong>Introduction to Hardware and Software:</strong></h3><ul id="16056e01-f431-8014-8a6e-d4f60dac7254" class="bulleted-list"><li style="list-style-type:disc"><strong>Hardware:</strong> Physical components like the mouse, keyboard, RAM, and CPU.</li></ul><ul id="16056e01-f431-8045-aab3-d1f2a4b255cd" class="bulleted-list"><li style="list-style-type:disc"><strong>Software:</strong> Programs running on hardware, controlled by sequences of instructions called &quot;computer programs.&quot;</li></ul><ul id="16056e01-f431-80db-a5c5-df9b1fbaee5a" class="bulleted-list"><li style="list-style-type:disc"><strong>Java:</strong> A widely-used programming language designed for desktop, server, and web-based applications.</li></ul><hr id="16056e01-f431-8056-b1cf-f3daab650cd9"/><h3 id="16056e01-f431-80c9-8fb4-e2be02a40355" class=""><strong>Computer Organization:</strong></h3><ul id="16056e01-f431-80e3-96d6-cdb3600ef247" class="bulleted-list"><li style="list-style-type:disc"><strong>Logical Units of a Computer System:</strong><ol type="1" id="16056e01-f431-8080-bc75-e5e4d8b796f4" class="numbered-list" start="1"><li><strong>Input Unit:</strong> Mouse, keyboard.</li></ol><ol type="1" id="16056e01-f431-8010-ad61-cddb6e030223" class="numbered-list" start="2"><li><strong>Output Unit:</strong> Printer, monitor, audio speakers.</li></ol><ol type="1" id="16056e01-f431-80c8-a50f-f8d75a26a7bd" class="numbered-list" start="3"><li><strong>Memory Unit:</strong> RAM.</li></ol><ol type="1" id="16056e01-f431-806a-9012-f1b1f0081eb7" class="numbered-list" start="4"><li><strong>Arithmetic and Logic Unit (ALU):</strong> Performs calculations.</li></ol><ol type="1" id="16056e01-f431-80dc-8f5a-ff9c9933fcfd" class="numbered-list" start="5"><li><strong>CPU:</strong> Supervises device operations.</li></ol><ol type="1" id="16056e01-f431-80e3-ba88-f4d75f19ab47" class="numbered-list" start="6"><li><strong>Secondary Storage:</strong> Hard drives, floppy drives.</li></ol><p id="16056e01-f431-8035-af9e-e51fdbf70764" class="">
+	</p></li></ul><hr id="16056e01-f431-8028-a504-ec7c0b2bbac3"/><h3 id="16056e01-f431-8012-83bf-de4c114bac35" class=""><strong>Data Hierarchy:</strong></h3><ol type="1" id="16056e01-f431-80c2-aac5-e37d36b529e7" class="numbered-list" start="1"><li>Bits</li></ol><ol type="1" id="16056e01-f431-8039-be5b-ca6254d01f35" class="numbered-list" start="2"><li>Characters</li></ol><ol type="1" id="16056e01-f431-80d8-af67-d04e4bdd2aa4" class="numbered-list" start="3"><li>Fields</li></ol><ol type="1" id="16056e01-f431-802e-a8ae-edc90ae53645" class="numbered-list" start="4"><li>Records</li></ol><ol type="1" id="16056e01-f431-8001-9f83-cde300f2bf8f" class="numbered-list" start="5"><li>Files</li></ol><ol type="1" id="16056e01-f431-8037-8822-ee5c37497e15" class="numbered-list" start="6"><li>Database</li></ol><ol type="1" id="16056e01-f431-803f-ab8a-c940802db363" class="numbered-list" start="7"><li>Big Data</li></ol><table id="16056e01-f431-805d-9715-c5a2cb7dd3fe" class="simple-table"><tbody><tr id="16056e01-f431-807e-b776-e1f2f87d87b2"><td id="E=KD" class="" style="width:570px"><strong>Unit</strong></td><td id="IY&gt;L" class="" style="width:570px"><strong>Bytes</strong></td><td id="Zb\S" class="" style="width:570px"><strong>Which is approximately</strong></td></tr><tr id="16056e01-f431-80f4-9b34-d1cbdead6c1e"><td id="E=KD" class="" style="width:570px">1 kilobyte (KB)</td><td id="IY&gt;L" class="" style="width:570px">1024 bytes</td><td id="Zb\S" class="" style="width:570px">10³ (1024 bytes exactly)</td></tr><tr id="16056e01-f431-8069-85b3-ebe05546612b"><td id="E=KD" class="" style="width:570px">1 megabyte (MB)</td><td id="IY&gt;L" class="" style="width:570px">1024 kilobytes</td><td id="Zb\S" class="" style="width:570px">10⁶ (1,000,000 bytes)</td></tr><tr id="16056e01-f431-80fd-98ff-dcaa02b962e3"><td id="E=KD" class="" style="width:570px">1 gigabyte (GB)</td><td id="IY&gt;L" class="" style="width:570px">1024 megabytes</td><td id="Zb\S" class="" style="width:570px">10⁹ (1,000,000,000 bytes)</td></tr><tr id="16056e01-f431-805a-90af-eabe5e1447fe"><td id="E=KD" class="" style="width:570px">1 terabyte (TB)</td><td id="IY&gt;L" class="" style="width:570px">1024 gigabytes</td><td id="Zb\S" class="" style="width:570px">10¹² (1,000,000,000,000 bytes)</td></tr><tr id="16056e01-f431-805b-b030-de97f9915eb2"><td id="E=KD" class="" style="width:570px">1 petabyte (PB)</td><td id="IY&gt;L" class="" style="width:570px">1024 terabytes</td><td id="Zb\S" class="" style="width:570px">10¹⁵ (1,000,000,000,000,000 bytes)</td></tr><tr id="16056e01-f431-80b6-b746-fa288a6b6035"><td id="E=KD" class="" style="width:570px">1 exabyte (EB)</td><td id="IY&gt;L" class="" style="width:570px">1024 petabytes</td><td id="Zb\S" class="" style="width:570px">10¹⁸ (1,000,000,000,000,000,000 bytes)</td></tr><tr id="16056e01-f431-80ce-ac6b-e03fab404681"><td id="E=KD" class="" style="width:570px">1 zettabyte (ZB)</td><td id="IY&gt;L" class="" style="width:570px">1024 exabytes</td><td id="Zb\S" class="" style="width:570px">10²¹ (1,000,000,000,000,000,000,000 bytes)</td></tr></tbody></table><hr id="16056e01-f431-80f8-bc5a-e94d3b9600cc"/><h3 id="16056e01-f431-8073-9766-ee99e2abfcd9" class=""><strong>Programming Languages:</strong></h3><h3 id="16056e01-f431-808a-a327-cd849da8f90c" class=""><strong>Low-Level Programming:</strong></h3><ul id="16056e01-f431-802b-be57-c8b0f6025bb5" class="bulleted-list"><li style="list-style-type:disc">Machine language: Hardware-specific binary instructions.</li></ul><ul id="16056e01-f431-8078-84af-ceed79026a1b" class="bulleted-list"><li style="list-style-type:disc">Assembly language: Simplified English-like codes.</li></ul><h3 id="16056e01-f431-80a9-995f-c2b8ebb2f342" class=""><strong>High-Level Programming:</strong></h3><ul id="16056e01-f431-8006-837e-c5005fdee35a" class="bulleted-list"><li style="list-style-type:disc">Use compilers to translate high-level languages into machine language.</li></ul><ul id="16056e01-f431-807b-930f-e93fa94519a1" class="bulleted-list"><li style="list-style-type:disc">Interpreters execute programs directly, avoiding compilation delays.</li></ul><hr id="16056e01-f431-8020-9c04-c443689231dd"/><h3 id="16056e01-f431-8068-a71c-edeea40169af" class=""><strong>Operating Systems:</strong></h3><ul id="16056e01-f431-8051-91ef-cc9612e3c152" class="bulleted-list"><li style="list-style-type:disc">Facilitate efficient, safe, and parallel execution of applications.</li></ul><ul id="16056e01-f431-803c-8916-cb4b0b45dc37" class="bulleted-list"><li style="list-style-type:disc">Core component: <strong>Kernel</strong></li></ul><ul id="16056e01-f431-8001-8804-f104a5263139" class="bulleted-list"><li style="list-style-type:disc">Examples: Windows, Linux, macOS, Android.</li></ul><hr id="16056e01-f431-8053-bfba-ce60bdda899e"/><h3 id="16056e01-f431-8084-826e-e9936e49f10b" class=""><strong>Java Development Environment:</strong></h3><ul id="16056e01-f431-80c7-8f69-c5386fe7085a" class="toggle"><li><details open=""><summary><strong>Phase 1: Creating a Program</strong></summary><ul id="16056e01-f431-8055-97a8-c283b2e33ac4" class="bulleted-list"><li style="list-style-type:disc">Write source code in <code>.java</code> files using an editor or IDE.</li></ul><ul id="16056e01-f431-800b-93f7-e9b1ca2c1373" class="bulleted-list"><li style="list-style-type:disc">Popular IDEs: Eclipse, NetBeans, IntelliJ IDEA, BlueJ.</li></ul></details></li></ul><ul id="16056e01-f431-80c5-a43d-d92c33f79e3d" class="toggle"><li><details open=""><summary><strong>Phase 2: Compiling</strong></summary><ul id="16056e01-f431-8064-8ae2-f3100fceb8b8" class="bulleted-list"><li style="list-style-type:disc">Use <code>javac</code> (the Java compiler)  to compile <code>.java</code> files into bytecodes (.class files).</li></ul><table id="16056e01-f431-80c8-a9e9-f7a6987d66fc" class="simple-table"><thead class="simple-table-header"><tr id="16056e01-f431-8095-a593-c42475faaae2"><th id=";jaD" class="simple-table-header-color simple-table-header" style="width:841px">machine-language instructions</th><th id="p[T;" class="simple-table-header-color simple-table-header" style="width:841px">bytecode instructions</th></tr></thead><tbody><tr id="16056e01-f431-8063-8990-f3de3883762f"><td id=";jaD" class="" style="width:841px">platform dependent</td><td id="p[T;" class="" style="width:841px">platform independent</td></tr><tr id="16056e01-f431-80aa-88e1-fa384e69c192"><td id=";jaD" class="" style="width:841px">Non-portable</td><td id="p[T;" class="" style="width:841px">portable</td></tr><tr id="16056e01-f431-80b6-ad2b-ea9d6b34bbfc"><td id=";jaD" class="" style="width:841px">You need to recompile the source code<br/>on new machine.<br/></td><td id="p[T;" class="" style="width:841px">No need to recompile the source code on<br/>new machine<br/></td></tr></tbody></table></details></li></ul><ul id="16056e01-f431-805b-88f9-c0faf439835b" class="toggle"><li><details open=""><summary><strong>Phase 3: Loading</strong></summary><ul id="16056e01-f431-8020-8da6-fbb9aa3eadea" class="bulleted-list"><li style="list-style-type:disc">JVM loads the program into memory.</li></ul><ul id="16056e01-f431-804c-a40b-fcafa9d406ed" class="bulleted-list"><li style="list-style-type:disc">The JVM’s class loader takes the .class files containing the program’s bytecodes and transfers them to primary memory.</li></ul></details></li></ul><ul id="16056e01-f431-8050-94f3-f80686b707f9" class="toggle"><li><details open=""><summary><strong>Phase 4: Bytecode Verification</strong></summary><ul id="16056e01-f431-80a3-91c7-d0b15c42c205" class="bulleted-list"><li style="list-style-type:disc">Ensures bytecodes are valid and secure.</li></ul></details></li></ul><ul id="16056e01-f431-8026-84da-cad039a977ed" class="toggle"><li><details open=""><summary><strong>Phase 5: Execution</strong></summary><ul id="16056e01-f431-8043-865f-da115685f6e9" class="bulleted-list"><li style="list-style-type:disc">JVM executes bytecodes using interpretation and just-in-time (JIT) compilation.</li></ul><ul id="16056e01-f431-80f4-af8c-d5e3df9ce9ab" class="bulleted-list"><li style="list-style-type:disc">One in which source code is translated into bytecodes.</li></ul><ul id="16056e01-f431-8064-8c6f-dc962ac42c25" class="bulleted-list"><li style="list-style-type:disc">Second in which, during execution, the bytecodes are translated into machine language for the actual computer on which the program executes</li></ul></details></li></ul><ul id="16056e01-f431-801d-9d0b-e01a6a913a44" class="toggle"><li><details open=""><summary><strong>Common Programming Error</strong></summary><ul id="16056e01-f431-808e-a4f8-ef2493a09a2d" class="bulleted-list"><li style="list-style-type:disc">Errors such as division by zero occur as a program runs, so they’re called <mark class="highlight-red"><mark class="highlight-red_background">runtime errors</mark></mark> or <mark class="highlight-red"><mark class="highlight-red_background">execution-time errors.</mark></mark></li></ul><ul id="16056e01-f431-8005-bc62-d3dcfd7830d5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><mark class="highlight-red_background">Fatal runtime errors</mark></mark> cause programs to terminate immediately without having successfully performed their jobs.</li></ul><ul id="16056e01-f431-80b1-b21a-d0467d7370c3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-red"><mark class="highlight-red_background">Nonfatal runtime errors</mark></mark> allow programs to run to completion, often producing incorrect results.</li></ul></details></li></ul><hr id="16056e01-f431-8076-9646-dc0dae9e51f2"/><h3 id="16056e01-f431-8071-8b22-cb859a47ae55" class=""><strong>Internet and World Wide Web:</strong></h3><ul id="16056e01-f431-8054-9324-d43535a36d68" class="bulleted-list"><li style="list-style-type:disc"><strong>Internet:</strong> Initially developed for connecting a few mainframe systems. Now connects millions of computers worldwide.</li></ul><ul id="16056e01-f431-8097-aa70-d2109bd717a0" class="bulleted-list"><li style="list-style-type:disc"><strong>WWW:</strong> Enables locating and viewing multimedia-based documents.</li></ul><hr id="16056e01-f431-8032-9e06-ed6961953dca"/><h3 id="16056e01-f431-8069-ac84-c00960529a24" class=""><strong>Introduction to Object Technology:</strong></h3><ul id="16056e01-f431-80c6-b263-c99af93a8852" class="bulleted-list"><li style="list-style-type:disc"><strong>Objects:</strong> Reusable software components modeling real-world items.<ul id="16056e01-f431-80db-9999-c12a6ab161c4" class="bulleted-list"><li style="list-style-type:circle"><strong>Attributes:</strong> Size, shape, color.</li></ul><ul id="16056e01-f431-809b-80a3-c5bb54459b40" class="bulleted-list"><li style="list-style-type:circle"><strong>Behaviors:</strong> Actions like making calls or stopping engines.</li></ul></li></ul><ul id="16056e01-f431-8015-9c4d-f7435cfe96c0" class="bulleted-list"><li style="list-style-type:disc"><strong>Object-Oriented Design (OOD):</strong><ul id="16056e01-f431-8088-bc7a-f2aea72f6b55" class="bulleted-list"><li style="list-style-type:circle">Encapsulates data and behaviors.</li></ul><ul id="16056e01-f431-804f-b467-c309158c132e" class="bulleted-list"><li style="list-style-type:circle">Communicates through well-defined interfaces.</li></ul><ul id="16056e01-f431-808f-8aae-cf440629694b" class="bulleted-list"><li style="list-style-type:circle">Programming language: <strong>Java.</strong></li></ul></li></ul><hr id="16056e01-f431-802a-a3b7-c927150bf35f"/><h3 id="16056e01-f431-803a-906f-daf2ef0af7d5" class=""><strong>References:</strong></h3><ol type="1" id="16056e01-f431-8084-829a-e6f1c00bef30" class="numbered-list" start="1"><li><strong>Deitel, P. J., &amp; Deitel, H. M. (2017):</strong><p id="16056e01-f431-802b-b2cd-edc13259dbca" class=""><em><a href="https://www.pearson.com/store/p/java-how-to-program-late-objects-11th-edition/P100000450356">Java: How to Program (Late Objects), 11th Edition.</a></em><a href="https://www.pearson.com/store/p/java-how-to-program-late-objects-11th-edition/P100000450356"> Pearson Education. A comprehensive resource for learning Java programming.</a></p></li></ol><ol type="1" id="16056e01-f431-8070-9a8f-d76838945ea1" class="numbered-list" start="2"><li><strong>Oracle Documentation:</strong><p id="16056e01-f431-803d-8ecc-e1ffad14e15e" class=""><em><a href="https://docs.oracle.com/javase/tutorial/">The Java Tutorials - Introduction to Java Programming.</a></em><a href="https://docs.oracle.com/javase/tutorial/"> Official Oracle tutorials covering Java basics and APIs.</a></p></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

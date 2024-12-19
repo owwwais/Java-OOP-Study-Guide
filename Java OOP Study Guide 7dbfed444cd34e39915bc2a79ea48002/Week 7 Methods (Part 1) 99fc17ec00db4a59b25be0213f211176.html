@@ -1,0 +1,797 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Methods</title><style>
+	/* cspell:disable-file */
+	/* webkit printing magic: print all background colors */
+	html {
+		-webkit-print-color-adjust: exact;
+	}
+	* {
+		box-sizing: border-box;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+	@media only screen {
+		body {
+			margin: 2em auto;
+			max-width: 90%;
+			color: rgb(55, 53, 47);
+		}
+	}
+
+	body {
+		line-height: 1.5;
+		white-space: pre-wrap;
+	}
+	
+	a,
+	a.visited {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+	.pdf-relative-link-path {
+		font-size: 80%;
+		color: #444;
+	}
+	
+	h1,
+	h2,
+	h3 {
+		letter-spacing: -0.01em;
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 0;
+	}
+	
+	.page-title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-top: 0;
+		margin-bottom: 0.75em;
+	}
+	
+	h1 {
+		font-size: 1.875rem;
+		margin-top: 1.875rem;
+	}
+	
+	h2 {
+		font-size: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin-top: 1.25rem;
+	}
+	
+	.source {
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		padding: 1.5em;
+		word-break: break-all;
+	}
+	
+	.callout {
+		border-radius: 3px;
+		padding: 1rem;
+	}
+	
+	figure {
+		margin: 1.25em 0;
+		page-break-inside: avoid;
+	}
+	
+	figcaption {
+		opacity: 0.5;
+		font-size: 85%;
+		margin-top: 0.5em;
+	}
+	
+	mark {
+		background-color: transparent;
+	}
+	
+	.indented {
+		padding-left: 1.5em;
+	}
+	
+	hr {
+		background: transparent;
+		display: block;
+		width: 100%;
+		height: 1px;
+		visibility: visible;
+		border: none;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+	}
+	
+	img {
+		max-width: 100%;
+	}
+	
+	@media only print {
+		img {
+			max-height: 100vh;
+			object-fit: contain;
+		}
+	}
+	
+	@page {
+		margin: 1in;
+	}
+	
+	.collection-content {
+		font-size: 0.875rem;
+	}
+	
+	.column-list {
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.column {
+		padding: 0 1em;
+	}
+	
+	.column:first-child {
+		padding-left: 0;
+	}
+	
+	.column:last-child {
+		padding-right: 0;
+	}
+	
+	.table_of_contents-item {
+		display: block;
+		font-size: 0.875rem;
+		line-height: 1.3;
+		padding: 0.125rem;
+	}
+	
+	.table_of_contents-indent-1 {
+		margin-left: 1.5rem;
+	}
+	
+	.table_of_contents-indent-2 {
+		margin-left: 3rem;
+	}
+	
+	.table_of_contents-indent-3 {
+		margin-left: 4.5rem;
+	}
+	
+	.table_of_contents-link {
+		text-decoration: none;
+		opacity: 0.7;
+		border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+	}
+	
+	table,
+	th,
+	td {
+		border: 1px solid rgba(55, 53, 47, 0.09);
+		border-collapse: collapse;
+	}
+	
+	table {
+		border-left: none;
+		border-right: none;
+	}
+	
+	th,
+	td {
+		font-weight: normal;
+		padding: 0.25em 0.5em;
+		line-height: 1.5;
+		min-height: 1.5em;
+		text-align: left;
+	}
+	
+	th {
+		color: rgba(55, 53, 47, 0.6);
+	}
+	
+	ol,
+	ul {
+		margin: 0;
+		margin-block-start: 0.6em;
+		margin-block-end: 0.6em;
+	}
+	
+	li > ol:first-child,
+	li > ul:first-child {
+		margin-block-start: 0.6em;
+	}
+	
+	ul > li {
+		list-style: disc;
+	}
+	
+	ul.to-do-list {
+		padding-inline-start: 0;
+	}
+	
+	ul.to-do-list > li {
+		list-style: none;
+	}
+	
+	.to-do-children-checked {
+		text-decoration: line-through;
+		opacity: 0.375;
+	}
+	
+	ul.toggle > li {
+		list-style: none;
+	}
+	
+	ul {
+		padding-inline-start: 1.7em;
+	}
+	
+	ul > li {
+		padding-left: 0.1em;
+	}
+	
+	ol {
+		padding-inline-start: 1.6em;
+	}
+	
+	ol > li {
+		padding-left: 0.2em;
+	}
+	
+	.mono ol {
+		padding-inline-start: 2em;
+	}
+	
+	.mono ol > li {
+		text-indent: -0.4em;
+	}
+	
+	.toggle {
+		padding-inline-start: 0em;
+		list-style-type: none;
+	}
+	
+	/* Indent toggle children */
+	.toggle > li > details {
+		padding-left: 1.7em;
+	}
+	
+	.toggle > li > details > summary {
+		margin-left: -1.1em;
+	}
+	
+	.selected-value {
+		display: inline-block;
+		padding: 0 0.5em;
+		background: rgba(206, 205, 202, 0.5);
+		border-radius: 3px;
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		margin-bottom: 0.3em;
+		white-space: nowrap;
+	}
+	
+	.collection-title {
+		display: inline-block;
+		margin-right: 1em;
+	}
+	
+	.page-description {
+		margin-bottom: 2em;
+	}
+	
+	.simple-table {
+		margin-top: 1em;
+		font-size: 0.875rem;
+		empty-cells: show;
+	}
+	.simple-table td {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table th {
+		height: 29px;
+		min-width: 120px;
+	}
+	
+	.simple-table-header-color {
+		background: rgb(247, 246, 243);
+		color: black;
+	}
+	.simple-table-header {
+		font-weight: 500;
+	}
+	
+	time {
+		opacity: 0.5;
+	}
+	
+	.icon {
+		display: inline-block;
+		max-width: 1.2em;
+		max-height: 1.2em;
+		text-decoration: none;
+		vertical-align: text-bottom;
+		margin-right: 0.5em;
+	}
+	
+	img.icon {
+		border-radius: 3px;
+	}
+	
+	.user-icon {
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 100%;
+		margin-right: 0.5rem;
+	}
+	
+	.user-icon-inner {
+		font-size: 0.8em;
+	}
+	
+	.text-icon {
+		border: 1px solid #000;
+		text-align: center;
+	}
+	
+	.page-cover-image {
+		width: 100%;
+		height: 300px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-bottom: 2em;
+	}
+	
+	.page-header-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+	
+	.page-header-icon-with-cover {
+		margin-top: -0.72em;
+		margin-left: 0.07em;
+	}
+	
+	.page-header-icon img {
+		border-radius: 3px;
+	}
+	
+	.link-to-page {
+		margin: 1em 0;
+		padding: 0;
+		border: none;
+		font-weight: 500;
+	}
+	
+	p > .user {
+		opacity: 0.5;
+	}
+	
+	td > .user,
+	td > time {
+		white-space: nowrap;
+	}
+	
+	input[type="checkbox"] {
+		transform: scale(1.5);
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+	
+	p {
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+	
+	.image {
+		border: none;
+		margin: 1.5em 0;
+		padding: 0;
+		border-radius: 0;
+		text-align: center;
+	}
+	
+	.code,
+	code {
+		background: rgba(135, 131, 120, 0.15);
+		border-radius: 3px;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 85%;
+		tab-size: 2;
+	}
+	
+	code {
+		color: #eb5757;
+	}
+	
+	.code {
+		padding: 1.5em 1em;
+	}
+	
+	.code-wrap {
+		white-space: pre-wrap;
+		word-break: break-all;
+	}
+	
+	.code > code {
+		background: none;
+		padding: 0;
+		font-size: 100%;
+		color: inherit;
+	}
+	
+	blockquote {
+		font-size: 1.25em;
+		margin: 1em 0;
+		padding-left: 1em;
+		border-left: 3px solid rgb(55, 53, 47);
+	}
+	
+	.bookmark {
+		text-decoration: none;
+		max-height: 8em;
+		padding: 0;
+		display: flex;
+		width: 100%;
+		align-items: stretch;
+	}
+	
+	.bookmark-title {
+		font-size: 0.85em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		height: 1.75em;
+		white-space: nowrap;
+	}
+	
+	.bookmark-text {
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.bookmark-info {
+		flex: 4 1 180px;
+		padding: 12px 14px 14px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	
+	.bookmark-image {
+		width: 33%;
+		flex: 1 1 180px;
+		display: block;
+		position: relative;
+		object-fit: cover;
+		border-radius: 1px;
+	}
+	
+	.bookmark-description {
+		color: rgba(55, 53, 47, 0.6);
+		font-size: 0.75em;
+		overflow: hidden;
+		max-height: 4.5em;
+		word-break: break-word;
+	}
+	
+	.bookmark-href {
+		font-size: 0.75em;
+		margin-top: 0.25em;
+	}
+	
+	.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+	.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+	.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+	.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+	.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+	.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+	.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+	.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+	.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+	.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+	.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+	.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+	.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+	.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+	.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+	.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+	.highlight-default {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.highlight-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.highlight-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.highlight-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.highlight-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.highlight-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.highlight-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.highlight-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.highlight-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.highlight-default_background {
+		color: rgba(55, 53, 47, 1);
+	}
+	.highlight-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.highlight-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.highlight-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.highlight-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.highlight-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.highlight-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.highlight-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.highlight-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.highlight-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.block-color-default {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray {
+		color: rgba(120, 119, 116, 1);
+		fill: rgba(120, 119, 116, 1);
+	}
+	.block-color-brown {
+		color: rgba(159, 107, 83, 1);
+		fill: rgba(159, 107, 83, 1);
+	}
+	.block-color-orange {
+		color: rgba(217, 115, 13, 1);
+		fill: rgba(217, 115, 13, 1);
+	}
+	.block-color-yellow {
+		color: rgba(203, 145, 47, 1);
+		fill: rgba(203, 145, 47, 1);
+	}
+	.block-color-teal {
+		color: rgba(68, 131, 97, 1);
+		fill: rgba(68, 131, 97, 1);
+	}
+	.block-color-blue {
+		color: rgba(51, 126, 169, 1);
+		fill: rgba(51, 126, 169, 1);
+	}
+	.block-color-purple {
+		color: rgba(144, 101, 176, 1);
+		fill: rgba(144, 101, 176, 1);
+	}
+	.block-color-pink {
+		color: rgba(193, 76, 138, 1);
+		fill: rgba(193, 76, 138, 1);
+	}
+	.block-color-red {
+		color: rgba(212, 76, 71, 1);
+		fill: rgba(212, 76, 71, 1);
+	}
+	.block-color-default_background {
+		color: inherit;
+		fill: inherit;
+	}
+	.block-color-gray_background {
+		background: rgba(241, 241, 239, 1);
+	}
+	.block-color-brown_background {
+		background: rgba(244, 238, 238, 1);
+	}
+	.block-color-orange_background {
+		background: rgba(251, 236, 221, 1);
+	}
+	.block-color-yellow_background {
+		background: rgba(251, 243, 219, 1);
+	}
+	.block-color-teal_background {
+		background: rgba(237, 243, 236, 1);
+	}
+	.block-color-blue_background {
+		background: rgba(231, 243, 248, 1);
+	}
+	.block-color-purple_background {
+		background: rgba(244, 240, 247, 0.8);
+	}
+	.block-color-pink_background {
+		background: rgba(249, 238, 243, 0.8);
+	}
+	.block-color-red_background {
+		background: rgba(253, 235, 236, 1);
+	}
+	.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+	.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+	.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+	.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+	.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+	.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+	.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+	.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+	.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+	.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+	.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+	.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+	.select-value-color-pageGlass { background-color: undefined; }
+	.select-value-color-washGlass { background-color: undefined; }
+	
+	.checkbox {
+		display: inline-flex;
+		vertical-align: text-bottom;
+		width: 16;
+		height: 16;
+		background-size: 16px;
+		margin-left: 2px;
+		margin-right: 5px;
+	}
+	
+	.checkbox-on {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+	
+	.checkbox-off {
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+	}
+		
+	</style></head><body><article id="99fc17ec-00db-4a59-b25b-e0213f211176" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1543285198-3af15c4592ce?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><h1 class="page-title">Methods</h1><p class="page-description"></p><table class="properties"><tbody></tbody></table></header><div class="page-body"><h2 id="16056e01-f431-8078-8ca1-ca3ec23cf076" class=""><strong>1. Modules Approach</strong></h2><ul id="16056e01-f431-8076-9cfe-e712dacfdb56" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong> Modularizing a program by dividing tasks into self-contained methods.</li></ul><ul id="16056e01-f431-80a2-b5e4-dd3df4785c48" class="bulleted-list"><li style="list-style-type:disc"><strong>Benefits:</strong><ol type="1" id="16056e01-f431-80b1-ab23-d04803d6ffea" class="numbered-list" start="1"><li>Simplifies code (Divide and Conquer).</li></ol><ol type="1" id="16056e01-f431-807a-93ee-ff25bfcfec60" class="numbered-list" start="2"><li>Increases reusability by using methods as building blocks.</li></ol><ol type="1" id="16056e01-f431-8013-b65a-f69ed0b00e4e" class="numbered-list" start="3"><li>Makes programs easier to manage and debug.</li></ol></li></ul><p id="16056e01-f431-808f-8c59-c8f2a891db4c" class=""><strong>Example (Sum Calculation Without Methods):</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8004-b9f0-cc83118cd158" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int sum = 0;
+	for (int i = 1; i &lt;= 10; i++) sum += i;
+	System.out.println(&quot;Sum from 1 to 10 is &quot; + sum);</code></pre><p id="16056e01-f431-809f-91d7-d764050a85d1" class=""><strong>With Methods:</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-809b-b55b-c73cf77b3649" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static int sum(int i1, int i2) {
+		int sum = 0;
+		for (int i = i1; i &lt;= i2; i++) sum += i;
+		return sum;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(&quot;Sum from 1 to 10 is &quot; + sum(1, 10));
+		System.out.println(&quot;Sum from 20 to 30 is &quot; + sum(20, 30));
+	}</code></pre><hr id="16056e01-f431-8030-a265-f39d7253b5b6"/><h2 id="16056e01-f431-80e2-b474-c581b843acea" class=""><strong>2. Declaring Methods</strong></h2><ul id="16056e01-f431-80ea-ac4a-e472db98ad94" class="bulleted-list"><li style="list-style-type:disc"><strong>Syntax:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8015-90d7-ce4e419c71c5" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static int methodName(int a, int b) {
+		// Body of the method
+	}</code></pre></li></ul><ul id="16056e01-f431-80be-9c9b-c522eac3e66b" class="bulleted-list"><li style="list-style-type:disc"><strong>Components:</strong><ol type="1" id="16056e01-f431-80c1-a0d2-e51fa2127688" class="numbered-list" start="1"><li><code>public static</code>: Modifiers (to be explained).</li></ol><ol type="1" id="16056e01-f431-80ef-9b7b-fca4dded9c1b" class="numbered-list" start="2"><li><code>int</code>: Return type (e.g., <code>int</code>, <code>void</code>).</li></ol><ol type="1" id="16056e01-f431-80ee-89c4-c2dfa89cb4b7" class="numbered-list" start="3"><li><code>methodName</code>: Method&#x27;s name (should start with a lowercase v<span style="border-bottom:0.05em solid">erb</span>).</li></ol><ol type="1" id="16056e01-f431-8085-862e-efe4cb9afd7c" class="numbered-list" start="4"><li><code>(int a, int b)</code>: Parameters (data passed into the method).</li></ol></li></ul><ul id="16056e01-f431-80ea-8de8-c156441638f4" class="bulleted-list"><li style="list-style-type:disc"><strong>Types of Methods:</strong><ol type="1" id="16056e01-f431-8079-b3ec-cfcd9af0d045" class="numbered-list" start="1"><li><strong>Predefined Methods:</strong> Already defined in Java (e.g., <code>Math.max()</code>).<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80ef-9306-f72439fd00e0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">System.out.println(Math.max(9, 7)); // Output: 9</code></pre></li></ol><ol type="1" id="16056e01-f431-804e-ac59-e003bfdeb8bd" class="numbered-list" start="2"><li><strong>User-defined Methods:</strong> Created by the programmer.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-807b-8665-cc0bf7f3af8c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static void findEvenOdd(int num) {
+		if (num % 2 == 0) System.out.println(num + &quot; is even&quot;);
+		else System.out.println(num + &quot; is odd&quot;);
+	}</code></pre></li></ol></li></ul><ul id="16056e01-f431-80ef-beb0-dcfc1c5baf60" class="bulleted-list"><li style="list-style-type:disc"><strong>Return Values:</strong><ul id="16056e01-f431-8042-80be-f3de7c5647e5" class="bulleted-list"><li style="list-style-type:circle">Use <code>return</code> to send a value back to the caller.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-803d-8ddb-cce250b4366e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static int add(int a, int b) {
+		return a + b;
+	}</code></pre></li></ul></li></ul><hr id="16056e01-f431-80c7-ad60-eaaded010915"/><h2 id="16056e01-f431-80c1-a27c-d530841c0220" class=""><strong>3. Arguments and Casting</strong></h2><ul id="16056e01-f431-802c-8939-db91bf57935b" class="bulleted-list"><li style="list-style-type:disc"><strong>Passing Parameters to Methods:</strong><ul id="16056e01-f431-80b3-8c38-d3bb1139e07e" class="bulleted-list"><li style="list-style-type:circle">Parameters are passed <strong>by value</strong> (a copy of the variable is passed).<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-803f-b981-f33d19ceeef2" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static void main(String[] args) {
+		int number = 1;
+		tryToChangeNumber(number);
+		System.out.println(number); // Output: 1 (value not changed)
+	}
+	
+	public static void tryToChangeNumber(int i) {
+		i = 2; // Only changes the local copy
+	}</code></pre></li></ul></li></ul><ul id="16056e01-f431-80a8-ad53-d2cd383117d8" class="bulleted-list"><li style="list-style-type:disc"><strong>Multiple Parameters:</strong><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80f1-9f21-c3cf06aed7c6" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static void myMethod(String fname, int age) {
+		System.out.println(fname + &quot; is &quot; + age);
+	}
+	
+	public static void main(String[] args) {
+		myMethod(&quot;Liam&quot;, 5);
+		myMethod(&quot;Jenny&quot;, 8);
+	}
+	// Output:
+	// Liam is 5
+	// Jenny is 8</code></pre></li></ul><ul id="16056e01-f431-806f-8f31-dcbc8807b88b" class="bulleted-list"><li style="list-style-type:disc"><strong>Argument Promotion:</strong><ul id="16056e01-f431-80dd-9711-c122a2acd1d1" class="bulleted-list"><li style="list-style-type:circle">Java can promote smaller data types to larger ones when required.<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8080-bcac-f0a9d4491ff5" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public static int square(int x) {
+		return x * x;
+	}
+	
+	public static void main(String[] args) {
+		double value = 4.5;
+		System.out.println(square((int) value)); // Output: 16
+	}</code></pre></li></ul></li></ul><hr id="16056e01-f431-802e-98f8-c8218f2bd168"/><h2 id="16056e01-f431-804e-b1b5-c1c8e85dcee2" class=""><strong>4. Java API Packages</strong></h2><ul id="16056e01-f431-80c8-ab6a-cbd4850ed722" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition:</strong><ul id="16056e01-f431-80e0-9af6-cae39588fe61" class="bulleted-list"><li style="list-style-type:circle">Packages group related classes into categories for better organization and reuse.</li></ul><ul id="16056e01-f431-8091-baa4-db7e102461ee" class="bulleted-list"><li style="list-style-type:circle">Example: <code>javax.swing.JApplet</code>.</li></ul></li></ul><ul id="16056e01-f431-8017-b6f0-c747b7fd67f5" class="bulleted-list"><li style="list-style-type:disc"><strong>Benefits:</strong><ol type="1" id="16056e01-f431-806b-ba18-c1f88f4c131b" class="numbered-list" start="1"><li>Promotes software reuse.</li></ol><ol type="1" id="16056e01-f431-8072-b8ba-fc5bb49b17fb" class="numbered-list" start="2"><li>Simplifies class access through the <code>import</code> statement.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-809f-bc2f-d3f41eaaca9b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">import java.util.Scanner;  // Importing Scanner class
+	public class Example {
+		public static void main(String[] args) {
+			Scanner input = new Scanner(System.in);
+			System.out.println(&quot;Enter a number: &quot;);
+			int number = input.nextInt();
+			System.out.println(&quot;You entered: &quot; + number);
+		}</code></pre></li></ul><table id="16056e01-f431-80c9-85ee-f9adcafb47bf" class="simple-table"><thead class="simple-table-header"><tr id="16056e01-f431-8063-a52b-dcdaa34fec6b"><th id="BCiZ" class="simple-table-header-color simple-table-header" style="width:283px"><strong>Package</strong></th><th id="{vw:" class="simple-table-header-color simple-table-header" style="width:1443px"><strong>Description</strong></th></tr></thead><tbody><tr id="16056e01-f431-800d-b611-e1899da7898a"><td id="BCiZ" class="" style="width:283px"><code><strong>java.awt.event</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Abstract Window Toolkit Event Package</strong> provides classes and interfaces for handling GUI events.</td></tr><tr id="16056e01-f431-8032-a23b-c3f24cb04d45"><td id="BCiZ" class="" style="width:283px"><code><strong>java.awt.geom</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java 2D Shapes Package</strong> supports advanced 2D graphics capabilities.</td></tr><tr id="16056e01-f431-8082-9496-e0e604f7de27"><td id="BCiZ" class="" style="width:283px"><code><strong>java.io</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Input/Output Package</strong> allows reading and writing input/output data.</td></tr><tr id="16056e01-f431-8052-aa08-c0b288445968"><td id="BCiZ" class="" style="width:283px"><code><strong>java.lang</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Language Package</strong> contains essential classes imported automatically by Java programs.</td></tr><tr id="16056e01-f431-808b-8274-e8b863e1507a"><td id="BCiZ" class="" style="width:283px"><code><strong>java.net</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Networking Package</strong> enables programs to communicate over computer networks.</td></tr><tr id="16056e01-f431-80d5-8b02-e984a8f8bf57"><td id="BCiZ" class="" style="width:283px"><code><strong>java.security</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Security Package</strong> enhances application security.</td></tr><tr id="16056e01-f431-801b-8351-fc6dd3e99e5b"><td id="BCiZ" class="" style="width:283px"><code><strong>java.sql</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>JDBC Package</strong> works with databases.</td></tr><tr id="16056e01-f431-80e2-ba62-d7e37fd70b07"><td id="BCiZ" class="" style="width:283px"><code><strong>java.util</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Utilities Package</strong> manages data storage, processing, and includes updated features for Java SE 8.</td></tr><tr id="16056e01-f431-800c-a957-c8774ccb228e"><td id="BCiZ" class="" style="width:283px"><code><strong>java.util.concurrent</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Concurrency Package</strong> enables multi-threaded task execution.</td></tr><tr id="16056e01-f431-80d6-bf7e-c992f4a241fa"><td id="BCiZ" class="" style="width:283px"><code><strong>javax.swing</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Swing GUI Components Package</strong> builds portable GUI components.</td></tr><tr id="16056e01-f431-8037-899b-fd445b275168"><td id="BCiZ" class="" style="width:283px"><code><strong>javax.swing.event</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java Swing Event Package</strong> handles GUI events such as button clicks.</td></tr><tr id="16056e01-f431-8093-8500-c46a270ffa08"><td id="BCiZ" class="" style="width:283px"><code><strong>javax.xml.ws</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>JAX-WS Package</strong> supports web services in Java.</td></tr><tr id="16056e01-f431-802f-a69b-d4e86aca7b6a"><td id="BCiZ" class="" style="width:283px"><code><strong>javafx packages</strong></code></td><td id="{vw:" class="" style="width:1443px"><strong>JavaFX</strong> is the modern GUI technology used for future graphical applications.</td></tr><tr id="16056e01-f431-809e-96b7-f019a3bd3874"><td id="BCiZ" class="" style="width:283px"><code><strong>java.time</strong></code></td><td id="{vw:" class="" style="width:1443px">The <strong>Java SE 8 Date/Time API Package</strong> provides classes for date and time management.</td></tr><tr id="16056e01-f431-8029-8b4e-f816e7befca1"><td id="BCiZ" class="" style="width:283px"><code><strong>java.util.function</strong></code></td><td id="{vw:" class="" style="width:1443px">Contains functional programming features introduced in Java SE 8.</td></tr><tr id="16056e01-f431-80bb-8894-c3f0ad27e5c1"><td id="BCiZ" class="" style="width:283px"><code><strong>java.util.stream</strong></code></td><td id="{vw:" class="" style="width:1443px">Includes classes for stream-based functional programming.</td></tr></tbody></table><hr id="16056e01-f431-80c6-acbd-db6337d44d36"/><h2 id="16056e01-f431-800a-98c6-da6596550f06" class=""><strong>5. Scope of Declaration</strong></h2><ul id="16056e01-f431-8065-b4fc-f0169be44fe3" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition: </strong>Scope refers to the portion of a program where a declared entity (e.g., variable, method) can be referenced by its name.</li></ul><ul id="16056e01-f431-808e-baea-f1d355d51a02" class="bulleted-list"><li style="list-style-type:disc"><strong>Types of Scope:</strong><ol type="1" id="16056e01-f431-8070-89a4-faa540c8b85c" class="numbered-list" start="1"><li><strong>Parameter Declaration Scope: </strong>Exists within the method in which the parameter is declared.</li></ol><ol type="1" id="16056e01-f431-8045-abd6-f9dedb25401b" class="numbered-list" start="2"><li><strong>Local Variable Scope: </strong>Limited to the block or method where the variable is declared.</li></ol><ol type="1" id="16056e01-f431-80d6-8ccb-ce526b8a3d54" class="numbered-list" start="3"><li><strong>Class Member Scope: </strong>Accessible by all methods within the class.</li></ol><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-803e-aca3-fd52fadb75f3" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class ScopeExample {
+		public static void main(String[] args) {
+			int x = 10; // Local variable
+			if (x &gt; 5) {
+				int y = 20; // Block scope
+				System.out.println(&quot;x + y = &quot; + (x + y));
+			}
+			System.out.println(y); // Error: y is out of scope
+		}
+	}</code></pre></li></ul><hr id="16056e01-f431-8024-941b-cc66da780faf"/><h2 id="16056e01-f431-80d4-a6bc-d58e3e247d76" class=""><strong>6. Method Overloading</strong></h2><ul id="16056e01-f431-80b4-bdfe-d3d80d565e3d" class="bulleted-list"><li style="list-style-type:disc"><strong>Definition: </strong>Allows multiple methods with the same name but different parameter lists.</li></ul><ul id="16056e01-f431-80c4-ae6c-f1bc61af5429" class="bulleted-list"><li style="list-style-type:disc"><strong>Key Points:</strong><ol type="1" id="16056e01-f431-805b-9bc7-fda297f20086" class="numbered-list" start="1"><li>Methods must have different numbers or types of parameters.</li></ol><ol type="1" id="16056e01-f431-80f0-9126-d6db193e8e1f" class="numbered-list" start="2"><li>Overloading does <strong>not</strong> depend on the return type.</li></ol></li></ul><div id="16056e01-f431-801c-b011-cbd0a83e8b3c" class="column-list"><div id="16056e01-f431-80fe-b8da-e75528f8c2ab" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-80db-ab1c-e89607368f5a" class="toggle"><li><details open=""><summary><strong>Example 1: Overloading with Different Parameter Types</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80af-8404-fc30aae3f72e" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Adder {
+		static int add(int a, int b) {
+			return a + b;
+		}
+	
+		static double add(double a, double b) {
+			return a + b;
+		}
+	
+		public static void main(String[] args) {
+			System.out.println(add(10, 20));
+			// Output: 30
+			
+			System.out.println(add(10.5, 20.5));
+			// Output: 31.0
+		}
+	}
+	</code></pre></details></li></ul></div><div id="16056e01-f431-807b-ae41-d7e20e29cd2d" style="width:33.33333333333335%" class="column"><ul id="16056e01-f431-80cf-aa3f-d87f19c9f69c" class="toggle"><li><details open=""><summary><strong>Example 2: Overloading with Different Numbers of Parameters</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-80a4-ad1c-ee8d4de924f1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class Adder {
+		static int add(int a, int b) {
+			return a + b;
+		}
+	
+		static int add(int a, int b, int c) {
+			return a + b + c;
+		}
+	
+		public static void main(String[] args) {
+			System.out.println(add(10, 20));
+			// Output: 30
+			
+			System.out.println(add(10, 20, 30));
+			// Output: 60
+		}
+	}
+	</code></pre></details></li></ul></div><div id="16056e01-f431-808a-a619-d4de62390e41" style="width:33.33333333333333%" class="column"><ul id="16056e01-f431-8092-8296-f7bcfdf21a43" class="toggle"><li><details open=""><summary><strong>Example 3: Overloading with Type Promotion</strong></summary><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16056e01-f431-8080-a1e1-d879b781cc92" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">class OverloadingExample {
+		static void sum(int a, long b) {
+			System.out.println(a + b);
+		}
+	
+		static void sum(int a, int b, int c) {
+			System.out.println(a + b + c);
+		}
+	
+		public static void main(String[] args) {
+			sum(20, 30L);
+			// Output: 50 (int promoted to long)
+			
+			sum(10, 20, 30);
+			// Output: 60
+		}
+	}
+	</code></pre></details></li></ul></div></div><hr id="16056e01-f431-80a3-afa8-fc8e4c23e5c4"/><h3 id="16056e01-f431-801c-89a0-fbb85a6073ce" class=""><strong>References:</strong></h3><ol type="1" id="16056e01-f431-8039-b06d-e810dc6026d9" class="numbered-list" start="1"><li>Deitel, P. J., &amp; Deitel, H. M. (2017). <em>Java: How to Program Late Objects</em>. Pearson.</li></ol><ol type="1" id="16056e01-f431-80de-879e-d437c7c8bb8c" class="numbered-list" start="2"><li>Java Tutorials: <a href="https://www.javatpoint.com/package">Java Packages</a></li></ol><ol type="1" id="16056e01-f431-80a7-8e17-f2dea4468620" class="numbered-list" start="3"><li>Java Tutorials: <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html">Oracle Documentation</a></li></ol><p id="16056e01-f431-803f-b613-ec3101436a94" class="">
+	</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
