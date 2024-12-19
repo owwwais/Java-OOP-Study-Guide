@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java OOP Study Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --apple-gray: #f5f5f7;
+            --apple-blue: #0071e3;
+            --apple-text: #1d1d1f;
+            --apple-shadow: rgba(0, 0, 0, 0.1);
+            --header-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --header-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --accent-color: #007AFF;
+            --text-primary: #2c3e50;
+            --text-secondary: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--apple-gray);
+            color: var(--apple-text);
+            line-height: 1.6;
+            cursor: none;
+        }
+
+        .header {
+            background: var(--header-gradient);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--header-shadow);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), #00c6ff);
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .header:hover h1::after {
+            width: 100px;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 1rem 0 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+
+        }
+
+        .card {
+            background: white;
+            border-radius: 2.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            cursor: pointer;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px var(--apple-shadow);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            color: var(--apple-blue);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--apple-text);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .quiz-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--apple-blue);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: none;
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+            transition: transform 0.2s ease;
+            z-index: 100;
+        }
+
+        .quiz-button:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            margin: 15% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal select, .modal button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: none;
+        }
+
+        .modal button {
+            background: var(--apple-blue);
+            color: white;
+            border: none;
+            cursor: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal button:hover {
+            background: #005abc;
+        }
+
+        .custom-cursor {
+            width: 30px;
+            height: 30px;
+            background: rgba(180, 180, 180, 0.4);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            backdrop-filter: blur(1px);
+        }
+
+        .custom-cursor.hover {
+            cursor: none !important;
+            background-color: rgba(255, 255, 255, 0) !important;
+            border: none !important;
+            backdrop-filter: blur(0px);
+        }
+
+        .card:hover ~ .custom-cursor,
+        button:hover ~ .custom-cursor,
+        select:hover ~ .custom-cursor,
+        .modal:hover ~ .custom-cursor {
+            transform: scale(1.5);
+            background: rgba(180, 180, 180, 0.3);
+        }
+
+        /* Responsive Design */
+        /* Extra large screens (desktop) */
+        @media (min-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(4, 5fr);
+                gap: 2rem;
+                padding: 2rem;
+            }
+            .card {
+                padding: 2rem;
+            }
+            .card i {
+                font-size: 3rem;
+            }
+        }
+
+        /* Large screens (laptops) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            .card {
+                padding: 1.8rem;
+            }
+            .card i {
+                font-size: 2.8rem;
+            }
+        }
+
+        /* Medium screens (tablets) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
+                padding: 1.2rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .card i {
+                font-size: 2.5rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Small screens (large phones) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .card i {
+                font-size: 2.2rem;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .card h3 {
+                font-size: 1.2rem;
+            }
+            .card p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small screens (phones) */
+        @media (max-width: 575px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .card i {
+                font-size: 2rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .card p {
+                font-size: 0.9rem;
+            }
+            #generateQuizBtn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .modal-content {
+                width: 90%;
+                margin: 20% auto;
+                padding: 1rem;
+            }
+            select, .modal button {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Handle very small screens */
+        @media (max-width: 320px) {
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card i {
+                font-size: 1.8rem;
+            }
+            .card h3 {
+                font-size: 1rem;
+            }
+            .card p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Fix for iOS Safari 100vh issue */
+        @supports (-webkit-touch-callout: none) {
+            .modal {
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        /* Ensure cursor works on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .custom-cursor {
+                display: none;
+            }
+            body, button, select, .card {
+                cursor: auto;
+            }
+        }
+
+        /* Update responsive styles for header */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+        }
+
+        a, button {
+            cursor: none !important; 
+        }
+        a:hover, button:hover {
+            background-color: rgba(255, 255, 255, 0) !important; /* جعل الخلفية شفافة */
+            border: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Java OOP Study Guide</h1>
+            <p>Master Object-Oriented Programming with our comprehensive guide. Select a topic to start learning or test your knowledge with our AI-powered quiz system.</p>
+        </div>
+        <div class="grid">
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 2 Introduction to Computer Science and Progra 372f4b8d6155472f891ce7a0705d6e3c.html'">
+                <i class="fas fa-rocket"></i>
+                <h3>Introduction to CS</h3>
+                <p>Fundamentals of Computer Science</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 3 Introduction to Java Applications I 5deff3df2835437ba01e4e0065dd9f99.html'">
+                <i class="fab fa-java"></i>
+                <h3>Java Basics</h3>
+                <p>Introduction to Java Applications</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 5 Control Statements I 37f202be15694d44ad7ca0c0f94bf2d5.html'">
+                <i class="fas fa-code-branch"></i>
+                <h3>Control Statements</h3>
+                <p>Basic Control Flow</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 7 Methods (Part 1) 99fc17ec00db4a59b25be0213f211176.html'">
+                <i class="fas fa-cube"></i>
+                <h3>Methods</h3>
+                <p>Introduction to Methods</p>
+            </div>
+
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 10 Arrays 16056e01f43180a09666df3674315c9a.html'">
+                <i class="fas fa-table"></i>
+                <h3>Arrays</h3>
+                <p>Working with Arrays</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 11 Classes and Objects I 16056e01f4318075ab78ef0fdfa011bb.html'">
+                <i class="fas fa-boxes"></i>
+                <h3>Classes & Objects</h3>
+                <p>Basic OOP Concepts</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 13 Inheritance & Polymorphism 16056e01f4318015a99ed1bd4f12a24c.html'">
+                <i class="fas fa-sitemap"></i>
+                <h3>Inheritance</h3>
+                <p>Inheritance & Polymorphism</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 14 Strings and Characters 16056e01f43180bb97aae18bdd02a684.html'">
+                <i class="fas fa-font"></i>
+                <h3>Strings</h3>
+                <p>String Manipulation</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/Week 15 Recursion 16056e01f431808092b4d3696ee63e2a.html'">
+                <i class="fas fa-redo"></i>
+                <h3>Recursion</h3>
+                <p>Recursive Programming</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Quiz Button -->
+    <button class="quiz-button" onclick="openQuizModal()">
+        <i class="fas fa-question-circle"></i> Generate Quiz
+    </button>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <h2>Generate Quiz</h2>
+            <div class="quiz-options">
+                <select id="topicSelect" style="margin-bottom: 15px;">
+                    <option value="all">All Topics</option>
+                    <option value="week2">Introduction to Computer Science</option>
+                    <option value="week3">Introduction to Java I</option>
+                    <option value="week4">Introduction to Java II</option>
+                    <option value="week5">Control Statements I</option>
+                    <option value="week6">Control Statements II</option>
+                    <option value="week7">Methods (Part 1)</option>
+                    <option value="week8">Methods (Part 2)</option>
+                    <option value="week10">Arrays</option>
+                    <option value="week11">Classes and Objects I</option>
+                    <option value="week12">Classes and Objects II</option>
+                    <option value="week13">Inheritance & Polymorphism</option>
+                    <option value="week14">Strings and Characters</option>
+                    <option value="week15">Recursion</option>
+                </select>
+                <select id="questionCount" style="margin-bottom: 15px;">
+                    <option value="5">5 Questions</option>
+                    <option value="10">10 Questions</option>
+                    <option value="20">20 Questions</option>
+                    <option value="30">30 Questions</option>
+                    <option value="40">40 Questions</option>
+                </select>
+            </div>
+            <div class="button-group">
+                <button onclick="generateQuiz()">Start Quiz</button>
+                <button onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create cursor element
+            const cursor = document.createElement('div');
+            cursor.classList.add('custom-cursor');
+            document.body.appendChild(cursor);
+
+            // Update cursor position
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+
+            // Add hover effect for interactive elements
+            const interactiveElements = document.querySelectorAll('.card, button, select, .modal-content');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+        });
+
+        function openQuizModal() {
+            document.getElementById('quizModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        function generateQuiz() {
+            const topic = document.getElementById('topicSelect').value;
+            const count = document.getElementById('questionCount').value;
+            window.location.href = `Java OOP Study Guide 7dbfed444cd34e39915bc2a79ea48002/quiz.html?topic=${topic}&count=${count}`;
+        }
+    </script>
+</body>
+</html>
